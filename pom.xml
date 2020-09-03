@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.ssau.tk.GGr3ml1N.TheyAllLooksSurprised</groupId>
-    <artifactId>ggr3ml1n.TheyAllLooksSurprised</artifactId>
+    <groupId>ru.ssau.tk.ggr3ml1n.theyalllookssurprised</groupId>
+    <artifactId>ggr3ml1n-theyalllookssurprised</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.target>1.14</maven.compiler.target>
-        <maven.compiler.source>1.14</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
     <dependencies>
     </dependencies>
 
 
-</project>/
+</project>
