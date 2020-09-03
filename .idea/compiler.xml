@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ggr3ml1n.TheyAllLooksSurprised" target="1.14" />
+      <module name="ggr3ml1n.TheyAllLooksSurprised" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
