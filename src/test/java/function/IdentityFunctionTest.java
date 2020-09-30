@@ -10,7 +10,7 @@ public class IdentityFunctionTest {
 
     @Test
     public void testApply() {
-        assertEquals(identityFunction.apply(1.111), 1,DELTA);
+        assertEquals(identityFunction.apply(4.111), 4.11,DELTA);
         assertNotEquals(identityFunction.apply(1.111), 7,DELTA);
         assertNotEquals(identityFunction.apply(1.111), 8,DELTA);
 
