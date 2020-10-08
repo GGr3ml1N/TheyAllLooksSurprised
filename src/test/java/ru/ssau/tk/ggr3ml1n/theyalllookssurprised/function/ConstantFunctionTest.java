@@ -7,8 +7,8 @@ import static org.testng.Assert.assertNotEquals;
 
 public class ConstantFunctionTest {
     private final static double DELTA = 0.01;
-    ConstantFunction testFunction = new ConstantFunction(666.1313);
-    ConstantFunction testFunction1 = new ConstantFunction(13.1313);
+    ConstantFunction testFunction = new ConstantFunction(4.111);
+    ConstantFunction testFunction1 = new ConstantFunction(15.1);
 
 
 
@@ -21,7 +21,7 @@ public class ConstantFunctionTest {
 
     @Test
     public void testGetConstanta() {
-        assertEquals(testFunction.getConstanta(), 666.1313, DELTA);
-        assertEquals(testFunction1.getConstanta(), 13.1313, DELTA);
+        assertEquals(testFunction.getConstanta(), 4.11, DELTA);
+        assertEquals(testFunction1.getConstanta(), 15.1, DELTA);
     }
 }
