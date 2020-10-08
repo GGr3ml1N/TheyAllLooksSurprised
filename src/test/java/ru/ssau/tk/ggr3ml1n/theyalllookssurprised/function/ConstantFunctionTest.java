@@ -3,7 +3,7 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
+
 
 public class ConstantFunctionTest {
     private final static double DELTA = 0.01;
