@@ -19,9 +19,9 @@ public class CompositeFunctionTest {
         MathFunction sqrtFunction = new SqrtFunction();
         MathFunction composite = new CompositeFunction(identityFunction, sqrtFunction);
         assertEquals(composite.apply(0), 0, DELTA);
-        MathFunction identityFunction1 = new ReverseSin();
-        assertEquals(identityFunction1.apply(36), -1, DELTA);
-        MathFunction composite1 = identityFunction.andThen(identityFunction1).andThen(identityFunction);
+        MathFunction reverseSin = new ReverseSin();
+        assertEquals(reverseSin.apply(36), -1, DELTA);
+        MathFunction composite1 = identityFunction.andThen(reverseSin).andThen(sqrtFunction);
         assertEquals(composite1.apply(3.14 / 2), 1, DELTA);
     }
 }
