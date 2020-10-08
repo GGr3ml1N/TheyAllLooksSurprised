@@ -16,7 +16,7 @@ public class ConstantFunctionTest {
     public void testApply() {
         assertEquals(testFunction.apply(4.111), 4.11, DELTA);
         assertNotEquals(testFunction.apply(1.111), 7, DELTA);
-        assertNotEquals(testFunction.apply(1.111), 8, DELTA);
+
     }
 
     @Test
