@@ -4,10 +4,9 @@ import static java.lang.Math.sin;
 
 public class ReverseSin implements MathFunction {
     @Override
-    public double apply ( double x) {
-        return 1/sin(x);
+    public double apply(double x) {
+        return 1 / sin(x);
     }
-
 
 
 }

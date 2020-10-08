@@ -1,11 +1,11 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
-public class CompositeFunction implements MathFunction{
+public class CompositeFunction implements MathFunction {
 
     private MathFunction firstFunction;
     private MathFunction secondFunction;
 
-    public CompositeFunction(MathFunction firstFunction, MathFunction secondFunction){
+    public CompositeFunction(MathFunction firstFunction, MathFunction secondFunction) {
         this.firstFunction = firstFunction;
         this.secondFunction = secondFunction;
     }
