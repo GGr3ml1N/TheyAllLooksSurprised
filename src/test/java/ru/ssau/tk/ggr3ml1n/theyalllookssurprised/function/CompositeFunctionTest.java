@@ -1,4 +1,4 @@
-package function;
+package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import org.testng.annotations.Test;
 
@@ -6,8 +6,8 @@ import static org.testng.Assert.*;
 
 public class CompositeFunctionTest {
     private final static double DELTA=0.01;
-    public final MathFunction firstFunction = new IdentityFunction1();
-    private final MathFunction secondFunction = new IdentityFunction1();
+    public final MathFunction firstFunction = new ReverseSin();
+    private final MathFunction secondFunction = new ReverseSin();
     private final MathFunction compositeFunction = new CompositeFunction(firstFunction, secondFunction);
 
     @Test

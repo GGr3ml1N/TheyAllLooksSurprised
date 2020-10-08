@@ -1,8 +1,6 @@
-package function;
+package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.*;
 
 public class ConstantFunctionTest {
 

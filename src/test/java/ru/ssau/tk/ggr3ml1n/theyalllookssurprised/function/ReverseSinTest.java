@@ -1,12 +1,12 @@
-package function;
+package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class IdentityFunction1Test {
+public class ReverseSinTest {
     private final static double DELTA=0.01;
-    private final MathFunction identityFunction1 = new IdentityFunction1();
+    private final MathFunction identityFunction1 = new ReverseSin();
 
     @Test
     public void testApply() {

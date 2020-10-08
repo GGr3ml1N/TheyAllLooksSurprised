@@ -1,4 +1,4 @@
-package function;
+package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 interface MathFunction {
 
