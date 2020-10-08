@@ -2,7 +2,7 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 public class ConstantFunction implements MathFunction {
 
-    final private double constanta;
+    private final double constanta;
 
     public ConstantFunction(double constanta) {
         this.constanta = constanta;
