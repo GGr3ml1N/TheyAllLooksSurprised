@@ -2,8 +2,8 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 public class CompositeFunction implements MathFunction {
 
-    private MathFunction firstFunction;
-    private MathFunction secondFunction;
+    private final MathFunction firstFunction;
+    private final MathFunction secondFunction;
 
     public CompositeFunction(MathFunction firstFunction, MathFunction secondFunction) {
         this.firstFunction = firstFunction;
@@ -12,7 +12,7 @@ public class CompositeFunction implements MathFunction {
 
     @Override
     public double apply(double x) {
-        return firstFunction.apply(secondFunction.apply(x));
+        return secondFunction.apply(firstFunction.apply(x));
     }
 
 }
