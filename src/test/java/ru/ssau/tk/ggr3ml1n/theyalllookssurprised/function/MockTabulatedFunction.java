@@ -1,5 +1,7 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function.AbstractTabulatedFunction;
+
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
 
     private static final double x0 = 1.0;
