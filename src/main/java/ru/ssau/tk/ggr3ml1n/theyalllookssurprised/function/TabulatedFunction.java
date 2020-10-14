@@ -1,7 +1,6 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 
-
 public interface TabulatedFunction extends MathFunction {
     int getCount();
 
