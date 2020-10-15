@@ -76,7 +76,7 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testGetCount() {
-        assertEquals(testingArrayFunction.getCount(), 6);
+        assertEquals(testingArrayFunction.getCount(), 0);
         assertNotEquals(testingArrayFunction.getCount(), 7);
         assertNotEquals(testingArrayFunction.getCount(), 5);
     }

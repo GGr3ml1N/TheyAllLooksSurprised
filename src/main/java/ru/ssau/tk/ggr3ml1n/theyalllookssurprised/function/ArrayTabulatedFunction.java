@@ -67,10 +67,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
 
-    @Override
-    public int getCount() {
-        return count;
-    }
+
+
 
     @Override
     public double getX(int index) {

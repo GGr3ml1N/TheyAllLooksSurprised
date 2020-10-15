@@ -78,7 +78,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(getListFunction().getCount(), 10, ACCURACY);
         final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, -1, 1, 1);
         assertEquals(getFunction().getCount(), 14);
-        assertEquals(testFunction.getCount(), 1);
+        assertEquals(testFunction.getCount(), 0);
     }
 
     @Test

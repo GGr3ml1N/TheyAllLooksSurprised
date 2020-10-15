@@ -3,7 +3,7 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
-    protected class Node {
+    protected static class Node {
         public Node next;
         public Node prev;
         public double x;
@@ -73,7 +73,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     protected double extrapolateRight(double x) {
         if (head.x == head.prev.x) {
-            return head.y;
+            return head.x;
         }
         return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
@@ -81,7 +81,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     protected double extrapolateLeft(double x) {
         if (head.x == head.prev.x) {
-            return head.y;
+            return head.x;
         }
         return interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }

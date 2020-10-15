@@ -1,6 +1,5 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
-import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function.AbstractTabulatedFunction;
 
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
 
@@ -77,5 +76,9 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public double rightBound() {
         return x1;
+    }
+    @Override
+    public int getCount() {
+        return count;
     }
 }
