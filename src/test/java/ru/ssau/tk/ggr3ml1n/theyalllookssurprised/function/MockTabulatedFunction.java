@@ -79,6 +79,6 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     }
     @Override
     public int getCount() {
-        return count;
+        return 2;
     }
 }

@@ -119,11 +119,11 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testSetY() {
         ArrayTabulatedFunction testingSetY = new ArrayTabulatedFunction(xValues, yValues);
-        testingSetY.setY(1, 2.28);
+        testingSetY.setY(1, 2.1);
         final double delta = 0.1;
-        assertEquals(testingSetY.getY(1), 2.28, delta);
-        testingSetY.setY(2, 2.35);
-        assertEquals(testingSetY.getY(2), 2.35, delta);
+        assertEquals(testingSetY.getY(1), 2.1, delta);
+        testingSetY.setY(2, 2.2);
+        assertEquals(testingSetY.getY(2), 2.2, delta);
         assertNotEquals(testingSetY.getY(2), 1.45, delta);
         testingArrayFunction().setY(2, 93);
         assertEquals(testingArrayFunction().getY(2), 2.64, delta);

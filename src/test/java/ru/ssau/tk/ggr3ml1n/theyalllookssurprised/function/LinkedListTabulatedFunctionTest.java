@@ -127,15 +127,15 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        listFunction().setY(2, 2);
-        assertEquals(listFunction().getY(1), 1.414, DELTA);
-        listFunction().setY(3, 3);
+        listFunction().setY(2, 2.2);
+        assertEquals(listFunction().getY(1), 1.41, DELTA);
+        listFunction().setY(3, 2.3);
         LinkedListTabulatedFunction function = getFunction();
         LinkedListTabulatedFunction someFunction = getListFunction();
-        someFunction.setY(1, 2);
-        assertEquals(someFunction.getY(1), 2, ACCURACY);
-        function.setY(2, 2);
-        assertEquals(function.getY(2), 2, ACCURACY);
+        someFunction.setY(1, 2.1);
+        assertEquals(someFunction.getY(1), 2.1, ACCURACY);
+        function.setY(2, 2.2);
+        assertEquals(function.getY(2), 2.2, ACCURACY);
     }
 
     @Test
