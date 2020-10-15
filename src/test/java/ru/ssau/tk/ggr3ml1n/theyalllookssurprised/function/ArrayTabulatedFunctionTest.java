@@ -177,4 +177,5 @@ public class ArrayTabulatedFunctionTest {
         assertNotEquals(testingArrayFunction.rightBound(), 27, delta);
 
     }
+
 }
