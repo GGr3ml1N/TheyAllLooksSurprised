@@ -6,9 +6,6 @@ import static org.testng.Assert.*;
 
 public class CompositeFunctionTest {
     private final static double DELTA = 0.01;
-    private final MathFunction firstFunction = new ReverseSin();
-    private final MathFunction secondFunction = new ReverseSin();
-    private final MathFunction compositeFunction = new CompositeFunction(firstFunction, secondFunction);
     private final double[] xValues1 = new double[]{1, 2, 3, 4, 5};
     private final double[] yValues1 = new double[]{6, 7, 8, 9, 10};
     private final double[] xValues2 = new double[]{11, 12, 13, 14, 15};

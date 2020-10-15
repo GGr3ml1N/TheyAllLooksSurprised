@@ -17,13 +17,20 @@ public class ArrayTabulatedFunctionTest {
     public void testApply() {
         ArrayTabulatedFunction testingApply = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
-        assertEquals(testingApply.apply(2.0), 3.0, delta);
-        assertEquals(testingApply.apply(8.84), 9.84, delta);
-        assertEquals(testingApply.apply(7.82), 8.82, delta);
+        assertEquals(testingApply.apply(-1.0), 0.0, delta);
+        assertEquals(testingApply.apply(1.5), 2.5, delta);
+        assertEquals(testingApply.apply(1.1), 2.1, delta);
+        assertEquals(testingApply.apply(1.15), 2.15, delta);
+        assertEquals(testingApply.apply(1.4), 2.4, delta);
+
         assertNotEquals(testingApply.apply(7.82), 1.23, delta);
-        assertEquals(testingArrayFunction().apply(-8.97), -2.32, delta);
-        assertEquals(testingArrayFunction().apply(27), 5.44, delta);
-        assertEquals(testingArrayFunction().apply(8.46), 2.89, delta);
+
+        assertEquals(testingArrayFunction().apply(-1.0), 0.33, delta);
+        assertEquals(testingArrayFunction().apply(1.5), 1.16, delta);
+        assertEquals(testingArrayFunction().apply(1.1), 1.03, delta);
+        assertEquals(testingArrayFunction().apply(1.15), 1.05, delta);
+        assertEquals(testingArrayFunction().apply(1.4), 1.13, delta);
+
         assertNotEquals(testingArrayFunction().apply(8.46), 59.25, delta);
     }
 

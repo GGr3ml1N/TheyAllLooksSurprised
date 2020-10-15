@@ -142,13 +142,21 @@ public class LinkedListTabulatedFunctionTest {
     public void testApply() {
         LinkedListTabulatedFunction testingApply = new LinkedListTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
-        assertEquals(testingApply.apply(0.9), 1.9, delta);
-        assertEquals(testingApply.apply(1.56), 2.56, delta);
-        assertEquals(testingApply.apply(1.22), 2.22, delta);
+        assertEquals(testingApply.apply(-1.0), 0.0, delta);
+        assertEquals(testingApply.apply(1.5), 2.5, delta);
+        assertEquals(testingApply.apply(1.1), 2.1, delta);
+        assertEquals(testingApply.apply(1.15), 2.15, delta);
+        assertEquals(testingApply.apply(1.4), 2.4, delta);
+
+        assertNotEquals(testingApply.apply(7.82), 1.23, delta);
         assertNotEquals(testingApply.apply(1.22), 1.23, delta);
-        assertEquals(listFunction().apply(-11.6), -4.21, delta);
-        assertEquals(listFunction().apply(21), 6.013, delta);
-        assertEquals(listFunction().apply(7.25), 2.76, delta);
+
+        assertEquals(listFunction().apply(-1.0), 0.17, delta);
+        assertEquals(listFunction().apply(1.5), 1.2, delta);
+        assertEquals(listFunction().apply(1.1), 1.04, delta);
+        assertEquals(listFunction().apply(1.4), 1.16, delta);
+        assertEquals(listFunction().apply(1.15), 1.06, delta);
+
         assertNotEquals(listFunction().apply(7.25), 59.25, delta);
     }
 }
