@@ -8,7 +8,10 @@ public class ArrayTabulatedFunctionTest {
     double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
     private final MathFunction source = new SqrtFunction();
-    private final ArrayTabulatedFunction testingArrayFunction = new ArrayTabulatedFunction(source, 1, 16, 6);
+    private ArrayTabulatedFunction testingArrayFunction() {
+        return new ArrayTabulatedFunction(source, 1, 16, 6);
+    }
+
 
     @Test
     public void testApply() {
@@ -18,10 +21,10 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingApply.apply(8.84), 9.84, delta);
         assertEquals(testingApply.apply(7.82), 8.82, delta);
         assertNotEquals(testingApply.apply(7.82), 1.23, delta);
-        assertEquals(testingArrayFunction.apply(-8.97), -2.32, delta);
-        assertEquals(testingArrayFunction.apply(27), 5.44, delta);
-        assertEquals(testingArrayFunction.apply(8.46), 2.89, delta);
-        assertNotEquals(testingArrayFunction.apply(8.46), 59.25, delta);
+        assertEquals(testingArrayFunction().apply(-8.97), -2.32, delta);
+        assertEquals(testingArrayFunction().apply(27), 5.44, delta);
+        assertEquals(testingArrayFunction().apply(8.46), 2.89, delta);
+        assertNotEquals(testingArrayFunction().apply(8.46), 59.25, delta);
     }
 
     @Test
@@ -31,9 +34,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingFloorIndexOfX.floorIndexOfX(1.35), 3, delta);
         assertEquals(testingFloorIndexOfX.floorIndexOfX(1.43), 5, delta);
         assertNotEquals(testingFloorIndexOfX.floorIndexOfX(1.43), 4);
-        assertEquals(testingArrayFunction.floorIndexOfX(8.93), 2);
-        assertEquals(testingArrayFunction.floorIndexOfX(66.67), 6);
-        assertNotEquals(testingArrayFunction.floorIndexOfX(66.67), 4);
+        assertEquals(testingArrayFunction().floorIndexOfX(8.93), 2);
+        assertEquals(testingArrayFunction().floorIndexOfX(66.67), 6);
+        assertNotEquals(testingArrayFunction().floorIndexOfX(66.67), 4);
     }
 
     @Test
@@ -43,9 +46,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingExtrapolateLeft.extrapolateLeft(1.1), 2.1, delta);
         assertEquals(testingExtrapolateLeft.extrapolateLeft(-1.5), -0.5, delta);
         assertNotEquals(testingExtrapolateLeft.extrapolateLeft(1.5), 40.0);
-        assertEquals(testingArrayFunction.extrapolateLeft(-80), -26.0, delta);
-        assertEquals(testingArrayFunction.extrapolateLeft(-2.1), -0.03, delta);
-        assertNotEquals(testingArrayFunction.extrapolateLeft(-2), 70, delta);
+        assertEquals(testingArrayFunction().extrapolateLeft(-80), -26.0, delta);
+        assertEquals(testingArrayFunction().extrapolateLeft(-2.1), -0.03, delta);
+        assertNotEquals(testingArrayFunction().extrapolateLeft(-2), 70, delta);
     }
 
     @Test
@@ -55,9 +58,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingExtrapolateRight.extrapolateRight(7.82), 8.82, delta);
         assertEquals(testingExtrapolateRight.extrapolateRight(3.56), 4.56, delta);
         assertNotEquals(testingExtrapolateRight.extrapolateRight(2.45), 2.18);
-        assertEquals(testingArrayFunction.extrapolateRight(25), 5.183, delta);
-        assertEquals(testingArrayFunction.extrapolateRight(69), 10.96, delta);
-        assertNotEquals(testingArrayFunction.extrapolateRight(69), 89, delta);
+        assertEquals(testingArrayFunction().extrapolateRight(25), 5.183, delta);
+        assertEquals(testingArrayFunction().extrapolateRight(69), 10.96, delta);
+        assertNotEquals(testingArrayFunction().extrapolateRight(69), 89, delta);
 
     }
 
@@ -68,17 +71,17 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingInterpolate.interpolate(7.478, 1), 8.478, delta);
         assertEquals(testingInterpolate.interpolate(7.473, 1), 8.473, delta);
         assertNotEquals(testingInterpolate.interpolate(68.247, 1), 4.237, delta);
-        assertEquals(testingArrayFunction.interpolate(15, 3), 3.9, delta);
-        assertEquals(testingArrayFunction.interpolate(19, 3), 4.49, delta);
-        assertNotEquals(testingArrayFunction.interpolate(11, 3), 121, delta);
+        assertEquals(testingArrayFunction().interpolate(15, 3), 3.9, delta);
+        assertEquals(testingArrayFunction().interpolate(19, 3), 4.49, delta);
+        assertNotEquals(testingArrayFunction().interpolate(11, 3), 121, delta);
 
     }
 
     @Test
     public void testGetCount() {
-        assertEquals(testingArrayFunction.getCount(), 0);
-        assertNotEquals(testingArrayFunction.getCount(), 7);
-        assertNotEquals(testingArrayFunction.getCount(), 5);
+        assertEquals(testingArrayFunction().getCount(), 0);
+        assertNotEquals(testingArrayFunction().getCount(), 7);
+        assertNotEquals(testingArrayFunction().getCount(), 5);
     }
 
     @Test
@@ -88,9 +91,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingGetX.getX(1), 1.1, delta);
         assertEquals(testingGetX.getX(2), 1.2, delta);
         assertNotEquals(testingGetX.getX(1), 2.2, delta);
-        assertEquals(testingArrayFunction.getX(1), 4, delta);
-        assertEquals(testingArrayFunction.getX(3), 10, delta);
-        assertNotEquals(testingArrayFunction.getX(3), 16, delta);
+        assertEquals(testingArrayFunction().getX(1), 4, delta);
+        assertEquals(testingArrayFunction().getX(3), 10, delta);
+        assertNotEquals(testingArrayFunction().getX(3), 16, delta);
 
     }
 
@@ -101,9 +104,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingGetY.getY(1), 2.1, delta);
         assertEquals(testingGetY.getY(2), 2.2, delta);
         assertNotEquals(testingGetY.getY(1), 3.2, delta);
-        assertEquals(testingArrayFunction.getY(1), 2, delta);
-        assertEquals(testingArrayFunction.getY(3), 3.16, delta);
-        assertNotEquals(testingArrayFunction.getY(3), 162, delta);
+        assertEquals(testingArrayFunction().getY(1), 2, delta);
+        assertEquals(testingArrayFunction().getY(3), 3.16, delta);
+        assertNotEquals(testingArrayFunction().getY(3), 162, delta);
     }
 
     @Test
@@ -115,11 +118,11 @@ public class ArrayTabulatedFunctionTest {
         testingSetY.setY(2, 2.35);
         assertEquals(testingSetY.getY(2), 2.35, delta);
         assertNotEquals(testingSetY.getY(2), 1.45, delta);
-        testingArrayFunction.setY(2, 93);
-        assertEquals(testingArrayFunction.getY(2), 93, delta);
-        assertNotEquals(testingArrayFunction.getY(2), 49, delta);
-        testingArrayFunction.setY(4, 23);
-        assertEquals(testingArrayFunction.getY(4), 23, delta);
+        testingArrayFunction().setY(2, 93);
+        assertEquals(testingArrayFunction().getY(2), 2.64, delta);
+        assertNotEquals(testingArrayFunction().getY(2), 49, delta);
+        testingArrayFunction().setY(4, 23);
+        assertEquals(testingArrayFunction().getY(4), 3.6, delta);
 
     }
 
@@ -130,9 +133,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingIndexOfX.indexOfX(1.3), 3, delta);
         assertEquals(testingIndexOfX.indexOfX(1.4), 4, delta);
         assertNotEquals(testingIndexOfX.indexOfX(1.5), 1, delta);
-        assertEquals(testingArrayFunction.indexOfX(13), 4);
-        assertEquals(testingArrayFunction.indexOfX(16), 5);
-        assertNotEquals(testingArrayFunction.indexOfX(13), 1);
+        assertEquals(testingArrayFunction().indexOfX(13), 4);
+        assertEquals(testingArrayFunction().indexOfX(16), 5);
+        assertNotEquals(testingArrayFunction().indexOfX(13), 1);
     }
 
     @Test
@@ -142,9 +145,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingIndexOfY.indexOfY(2.5), -1, delta);
         assertEquals(testingIndexOfY.indexOfY(2.4), 4, delta);
         assertNotEquals(testingIndexOfY.indexOfY(2.1), 4, delta);
-        assertEquals(testingArrayFunction.indexOfY(49), -1, delta);
-        assertEquals(testingArrayFunction.indexOfY(169), -1, delta);
-        assertNotEquals(testingArrayFunction.indexOfY(49), 6, delta);
+        assertEquals(testingArrayFunction().indexOfY(49), -1, delta);
+        assertEquals(testingArrayFunction().indexOfY(169), -1, delta);
+        assertNotEquals(testingArrayFunction().indexOfY(49), 6, delta);
     }
 
     @Test
@@ -157,9 +160,9 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingLeftBound.leftBound(), 1.0, delta);
         assertNotEquals(testingLeftBound.leftBound(), 1.2, delta);
         assertNotEquals(testingLeftBound.leftBound(), 1.5, delta);
-        assertEquals(testingArrayFunction.leftBound(), 1, delta);
-        assertNotEquals(testingArrayFunction.leftBound(), 2, delta);
-        assertNotEquals(testingArrayFunction.leftBound(), 5, delta);
+        assertEquals(testingArrayFunction().leftBound(), 1, delta);
+        assertNotEquals(testingArrayFunction().leftBound(), 2, delta);
+        assertNotEquals(testingArrayFunction().leftBound(), 5, delta);
 
     }
 
@@ -172,9 +175,9 @@ public class ArrayTabulatedFunctionTest {
         final double delta = 0.1;
         assertEquals(testingRightBound.rightBound(), 1.4, delta);
         assertNotEquals(testingRightBound.rightBound(), 1.6, delta);
-        assertEquals(testingArrayFunction.rightBound(), 16, delta);
-        assertNotEquals(testingArrayFunction.rightBound(), 19, delta);
-        assertNotEquals(testingArrayFunction.rightBound(), 27, delta);
+        assertEquals(testingArrayFunction().rightBound(), 16, delta);
+        assertNotEquals(testingArrayFunction().rightBound(), 19, delta);
+        assertNotEquals(testingArrayFunction().rightBound(), 27, delta);
 
     }
 
