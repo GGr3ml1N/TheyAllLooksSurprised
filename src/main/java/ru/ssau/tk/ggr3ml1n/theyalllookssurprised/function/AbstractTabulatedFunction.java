@@ -3,11 +3,6 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected int count;
 
-    @Override
-    public int getCount() {
-        return count;
-    }
-
     protected abstract int floorIndexOfX(double x);
 
     protected abstract double extrapolateLeft(double x);

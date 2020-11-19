@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class ArrayTabulatedFunctionTest {
+public abstract class ArrayTabulatedFunctionTest {
     double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
     private final MathFunction source = new SqrtFunction();
@@ -22,9 +22,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingApply.apply(1.1), 2.1, delta);
         assertEquals(testingApply.apply(1.15), 2.15, delta);
         assertEquals(testingApply.apply(1.4), 2.4, delta);
-
         assertNotEquals(testingApply.apply(7.82), 1.23, delta);
-
         assertEquals(testingArrayFunction().apply(-1.0), 0.33, delta);
         assertEquals(testingArrayFunction().apply(1.5), 1.16, delta);
         assertEquals(testingArrayFunction().apply(1.1), 1.03, delta);

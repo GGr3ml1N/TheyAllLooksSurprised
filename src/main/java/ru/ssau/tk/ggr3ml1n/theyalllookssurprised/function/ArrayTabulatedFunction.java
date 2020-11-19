@@ -30,6 +30,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
+    public int getCount() {
+        return count;
+    }
+
+    @Override
     protected int floorIndexOfX(double x) {
         if (x < xValues[0]) {
             return 0;

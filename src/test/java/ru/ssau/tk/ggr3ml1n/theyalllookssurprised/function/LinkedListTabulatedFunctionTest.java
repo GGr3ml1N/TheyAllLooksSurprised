@@ -24,23 +24,6 @@ public class LinkedListTabulatedFunctionTest {
         return new LinkedListTabulatedFunction(sqr, 1, 5, 7);
     }
 
-    @Test
-    public void testLeftBound() {
-        assertEquals(listFunction().leftBound(), 1, DELTA);
-        assertEquals(getListFunction().leftBound(), 1, ACCURACY);
-        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, Double.NaN, 7, 5);
-        assertEquals(testFunction.leftBound(), Double.NaN, ACCURACY);
-        assertEquals(getFunction().leftBound(), 1, ACCURACY);
-    }
-
-    @Test
-    public void testRightBound() {
-        assertEquals(listFunction().rightBound(), 5, DELTA);
-        assertEquals(getListFunction().rightBound(), 5, ACCURACY);
-        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, Double.NaN, 7, 5);
-        assertEquals(testFunction.rightBound(), Double.NaN);
-        assertEquals(getFunction().rightBound(), 5, ACCURACY);
-    }
 
     @Test
     public void testFloorIndexOfX() {
@@ -78,7 +61,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(getListFunction().getCount(), 10, ACCURACY);
         final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, -1, 1, 1);
         assertEquals(getFunction().getCount(), 14);
-        assertEquals(testFunction.getCount(), 0);
+        assertEquals(testFunction.getCount(), 1);
     }
 
     @Test
