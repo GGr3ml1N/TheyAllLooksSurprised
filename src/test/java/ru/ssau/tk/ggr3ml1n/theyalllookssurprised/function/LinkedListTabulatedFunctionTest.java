@@ -16,11 +16,11 @@ public class LinkedListTabulatedFunctionTest {
         return new LinkedListTabulatedFunction(source, 1, 5, 5);
     }
 
-    private LinkedListTabulatedFunction getListFunction() {
+    private AbstractTabulatedFunction getListFunction() {
         return new LinkedListTabulatedFunction(sqr, 1, 5, 5);
     }
 
-    private LinkedListTabulatedFunction getFunction() {
+    private AbstractTabulatedFunction getFunction() {
         return new LinkedListTabulatedFunction(sqr, 1, 5, 7);
     }
 
@@ -48,7 +48,7 @@ public class LinkedListTabulatedFunctionTest {
     public void testGetCount() {
         assertEquals(listFunction().getCount(), 10, DELTA);
         assertEquals(getListFunction().getCount(), 10, ACCURACY);
-        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(sqr, -1, 1, 1);
+        final AbstractTabulatedFunction testFunction = new LinkedListTabulatedFunction(sqr, -1, 1, 1);
         assertEquals(getFunction().getCount(), 14);
         assertEquals(testFunction.getCount(), 2);
     }
@@ -102,8 +102,8 @@ public class LinkedListTabulatedFunctionTest {
         listFunction().setY(2, 2.2);
         assertEquals(listFunction().getY(1), 1.41, DELTA);
         listFunction().setY(3, 2.3);
-        LinkedListTabulatedFunction function = getFunction();
-        LinkedListTabulatedFunction someFunction = getListFunction();
+        AbstractTabulatedFunction function = getFunction();
+        AbstractTabulatedFunction someFunction = getListFunction();
         someFunction.setY(1, 2.1);
         assertEquals(someFunction.getY(1), 2.1, ACCURACY);
         function.setY(2, 2.2);

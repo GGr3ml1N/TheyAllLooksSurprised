@@ -8,7 +8,7 @@ public class ArrayTabulatedFunctionTest {
     double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
     private final MathFunction source = new SqrtFunction();
-    private ArrayTabulatedFunction testingArrayFunction() {
+    private AbstractTabulatedFunction testingArrayFunction() {
         return new ArrayTabulatedFunction(source, 1, 16, 6);
     }
 
@@ -70,7 +70,7 @@ public class ArrayTabulatedFunctionTest {
 
     @Test
     public void testInterpolate() {
-        ArrayTabulatedFunction testingInterpolate = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingInterpolate = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingInterpolate.interpolate(7.478, 1), 8.478, delta);
         assertEquals(testingInterpolate.interpolate(7.473, 1), 8.473, delta);
