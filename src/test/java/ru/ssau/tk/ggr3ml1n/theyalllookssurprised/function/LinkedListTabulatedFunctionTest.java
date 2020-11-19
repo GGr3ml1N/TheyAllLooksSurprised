@@ -12,7 +12,7 @@ public class LinkedListTabulatedFunctionTest {
     private final double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     private final double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
 
-    private LinkedListTabulatedFunction listFunction() {
+    private AbstractTabulatedFunction listFunction() {
         return new LinkedListTabulatedFunction(source, 1, 5, 5);
     }
 
@@ -28,18 +28,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void testFloorIndexOfX() {
         assertEquals(listFunction().floorIndexOfX(2), 0, DELTA);
-        assertEquals(listFunction().floorIndexOfX(11), 10, DELTA);
-        assertEquals(listFunction().floorIndexOfX(-10), 0, DELTA);
-        assertEquals(getListFunction().floorIndexOfX(2), 0, ACCURACY);
-        assertEquals(getListFunction().floorIndexOfX(11), 10, ACCURACY);
-        assertEquals(getListFunction().floorIndexOfX(-10), 0, ACCURACY);
-        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, 1, 10, 10);
-        assertEquals(testFunction.floorIndexOfX(1.8), 0);
-        assertEquals(testFunction.floorIndexOfX(-1), 0);
-        assertEquals(testFunction.floorIndexOfX(6), 5);
-        assertEquals(testFunction.floorIndexOfX(4.5), 3);
-        assertEquals(getFunction().floorIndexOfX(2), 1);
-        assertEquals(getFunction().floorIndexOfX(-2), 0);
+        assertEquals(getListFunction().floorIndexOfX(5), 3, DELTA);
     }
 
     @Test
@@ -59,9 +48,9 @@ public class LinkedListTabulatedFunctionTest {
     public void testGetCount() {
         assertEquals(listFunction().getCount(), 10, DELTA);
         assertEquals(getListFunction().getCount(), 10, ACCURACY);
-        final ArrayTabulatedFunction testFunction = new ArrayTabulatedFunction(sqr, -1, 1, 1);
+        final LinkedListTabulatedFunction testFunction = new LinkedListTabulatedFunction(sqr, -1, 1, 1);
         assertEquals(getFunction().getCount(), 14);
-        assertEquals(testFunction.getCount(), 1);
+        assertEquals(testFunction.getCount(), 2);
     }
 
     @Test
@@ -123,7 +112,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testApply() {
-        LinkedListTabulatedFunction testingApply = new LinkedListTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingApply = new LinkedListTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingApply.apply(-1.0), 0.0, delta);
         assertEquals(testingApply.apply(1.5), 2.5, delta);

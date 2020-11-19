@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public abstract class ArrayTabulatedFunctionTest {
+public class ArrayTabulatedFunctionTest {
     double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
     private final MathFunction source = new SqrtFunction();
@@ -15,7 +15,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testApply() {
-        ArrayTabulatedFunction testingApply = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingApply = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingApply.apply(-1.0), 0.0, delta);
         assertEquals(testingApply.apply(1.5), 2.5, delta);
@@ -28,13 +28,12 @@ public abstract class ArrayTabulatedFunctionTest {
         assertEquals(testingArrayFunction().apply(1.1), 1.03, delta);
         assertEquals(testingArrayFunction().apply(1.15), 1.05, delta);
         assertEquals(testingArrayFunction().apply(1.4), 1.13, delta);
-
         assertNotEquals(testingArrayFunction().apply(8.46), 59.25, delta);
     }
 
     @Test
     public void testFloorIndexOfX() {
-        ArrayTabulatedFunction testingFloorIndexOfX = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingFloorIndexOfX = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.0001;
         assertEquals(testingFloorIndexOfX.floorIndexOfX(1.35), 3, delta);
         assertEquals(testingFloorIndexOfX.floorIndexOfX(1.43), 5, delta);
@@ -46,7 +45,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateLeft() {
-        ArrayTabulatedFunction testingExtrapolateLeft = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingExtrapolateLeft = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingExtrapolateLeft.extrapolateLeft(1.1), 2.1, delta);
         assertEquals(testingExtrapolateLeft.extrapolateLeft(-1.5), -0.5, delta);
@@ -58,7 +57,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateRight() {
-        ArrayTabulatedFunction testingExtrapolateRight = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingExtrapolateRight = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingExtrapolateRight.extrapolateRight(7.82), 8.82, delta);
         assertEquals(testingExtrapolateRight.extrapolateRight(3.56), 4.56, delta);
@@ -84,14 +83,14 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testGetCount() {
-        assertEquals(testingArrayFunction().getCount(), 0);
+        assertEquals(testingArrayFunction().getCount(), 6);
         assertNotEquals(testingArrayFunction().getCount(), 7);
         assertNotEquals(testingArrayFunction().getCount(), 5);
     }
 
     @Test
     public void testGetX() {
-        ArrayTabulatedFunction testingGetX = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingGetX = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingGetX.getX(1), 1.1, delta);
         assertEquals(testingGetX.getX(2), 1.2, delta);
@@ -104,7 +103,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testGetY() {
-        ArrayTabulatedFunction testingGetY = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingGetY = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingGetY.getY(1), 2.1, delta);
         assertEquals(testingGetY.getY(2), 2.2, delta);
@@ -116,7 +115,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testSetY() {
-        ArrayTabulatedFunction testingSetY = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingSetY = new ArrayTabulatedFunction(xValues, yValues);
         testingSetY.setY(1, 2.1);
         final double delta = 0.1;
         assertEquals(testingSetY.getY(1), 2.1, delta);
@@ -133,7 +132,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testIndexOfX() {
-        ArrayTabulatedFunction testingIndexOfX = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingIndexOfX = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingIndexOfX.indexOfX(1.3), 3, delta);
         assertEquals(testingIndexOfX.indexOfX(1.4), 4, delta);
@@ -145,7 +144,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testIndexOfY() {
-        ArrayTabulatedFunction testingIndexOfY = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingIndexOfY = new ArrayTabulatedFunction(xValues, yValues);
         final double delta = 0.1;
         assertEquals(testingIndexOfY.indexOfY(2.5), -1, delta);
         assertEquals(testingIndexOfY.indexOfY(2.4), 4, delta);
@@ -157,7 +156,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testLeftBound() {
-        ArrayTabulatedFunction testingLeftBound = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingLeftBound = new ArrayTabulatedFunction(xValues, yValues);
         assertEquals(testingLeftBound.leftBound(), 1.0, 0.0001);
         assertNotEquals(testingLeftBound.leftBound(), 1.2, 0.0001);
         assertNotEquals(testingLeftBound.leftBound(), 1.5, 0.0001);
@@ -173,7 +172,7 @@ public abstract class ArrayTabulatedFunctionTest {
 
     @Test
     public void testRightBound() {
-        ArrayTabulatedFunction testingRightBound = new ArrayTabulatedFunction(xValues, yValues);
+        AbstractTabulatedFunction testingRightBound = new ArrayTabulatedFunction(xValues, yValues);
         assertEquals(testingRightBound.rightBound(), 1.4, 0.0001);
         assertNotEquals(testingRightBound.rightBound(), 1.6, 0.0001);
         assertNotEquals(testingRightBound.rightBound(), 1.3, 0.0001);
