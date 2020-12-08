@@ -1,7 +1,7 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 
-public interface TabulatedFunction extends MathFunction {
+public interface TabulatedFunction extends MathFunction, Iterable<Point> {
     int getCount();
 
     double getX(int index);

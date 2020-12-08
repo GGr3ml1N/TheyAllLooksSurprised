@@ -2,6 +2,8 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.InterpolationException;
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
@@ -159,6 +161,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             indexNode = indexNode.next;
         }
         return new Node();
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }
 
