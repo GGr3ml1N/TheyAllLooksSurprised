@@ -1,6 +1,7 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.InterpolationException;
 
 import static org.testng.Assert.*;
 
@@ -61,6 +62,8 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(getListFunction().interpolate(2, getListFunction().floorIndexOfX(2)), 1.41, ACCURACY);
         assertEquals(getListFunction().interpolate(2, getListFunction().floorIndexOfX(2)), 1.41, ACCURACY);
         assertEquals(getListFunction().interpolate(4, getListFunction().floorIndexOfX(4)), 2, ACCURACY);
+        assertThrows(InterpolationException.class, () -> listFunction().interpolate(2, 2));
+        assertThrows(InterpolationException.class, () -> getListFunction().interpolate(4, 4));
     }
 
     @Test
