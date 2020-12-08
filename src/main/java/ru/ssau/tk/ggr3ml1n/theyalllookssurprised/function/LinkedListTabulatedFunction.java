@@ -1,5 +1,7 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
+import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.InterpolationException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
 
@@ -29,6 +31,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         for (int i = 0; i < xValues.length; i++) {
             this.addNode(xValues[i], yValues[i]);
         }
@@ -56,6 +60,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected int floorIndexOfX(double x) {
+        if (x < head.x) {
+            throw new IllegalArgumentException("X is beyond the left border");
+        }
         Node indexNode = head;
         for (int i = 0; i < count; i++) {
             if (indexNode.x < x) {
@@ -97,6 +104,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
+        if (x < leftNode.x || x > rightNode.x) {
+            throw new InterpolationException("X is out of bounds of interpolation");
+        }
         return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
     }
 

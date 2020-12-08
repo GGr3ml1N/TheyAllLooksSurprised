@@ -1,5 +1,7 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
+import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.InterpolationException;
+
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
@@ -8,6 +10,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         count = xValues.length;
         this.xValues = Arrays.copyOf(xValues, count);
         this.yValues = Arrays.copyOf(yValues, count);
@@ -65,58 +69,59 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1) {
-            return x;
-        }
-
-        return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
-    }
-
-
-
-
-    @Override
-    public double getX(int index) {
-        return xValues[index];
-    }
-
-    @Override
-    public double getY(int index) {
-        return yValues[index];
-    }
-
-    @Override
-    public void setY(int index, double value) {
-        yValues[index] = value;
-    }
-
-    @Override
-    public int indexOfX(double x) {
-        for (int i = 0; i < count; i++) {
-            if (xValues[i] == x) {
-                return i;
+            if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
+                throw new InterpolationException("X is out of bounds of interpolation");
             }
-        }
-        return -1;
-    }
 
-    @Override
-    public int indexOfY(double y) {
-        for (int i = 0; i < count; i++) {
-            if (yValues[i] == y) {
-                return i;
+            return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
+        }
+
+
+
+
+
+        @Override
+        public double getX ( int index){
+            return xValues[index];
+        }
+
+        @Override
+        public double getY ( int index){
+            return yValues[index];
+        }
+
+        @Override
+        public void setY ( int index, double value){
+            yValues[index] = value;
+        }
+
+        @Override
+        public int indexOfX ( double x){
+            for (int i = 0; i < count; i++) {
+                if (xValues[i] == x) {
+                    return i;
+                }
             }
+            return -1;
         }
-        return -1;
-    }
 
-    @Override
-    public double leftBound() {
-        return xValues[0];
-    }
+        @Override
+        public int indexOfY ( double y){
+            for (int i = 0; i < count; i++) {
+                if (yValues[i] == y) {
+                    return i;
+                }
+            }
+            return -1;
+        }
 
-    @Override
-    public double rightBound() {
-        return xValues[count - 1];
+        @Override
+        public double leftBound () {
+            return xValues[0];
+        }
+
+        @Override
+        public double rightBound () {
+            return xValues[count - 1];
+        }
     }
-}
