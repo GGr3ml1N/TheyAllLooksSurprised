@@ -45,4 +45,5 @@ public class AbstractTabulatedFunctionTest {
             AbstractTabulatedFunction.checkSorted(valuesX);
         });
     }
+
 }

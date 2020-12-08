@@ -1,6 +1,8 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 
+import java.util.Iterator;
+
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
 
     private static final double x0 = 1.0;
@@ -80,5 +82,9 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     @Override
     public int getCount() {
         return 2;
+    }
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }

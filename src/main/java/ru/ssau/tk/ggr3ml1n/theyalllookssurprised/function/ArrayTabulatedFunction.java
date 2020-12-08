@@ -125,7 +125,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public Iterator<Point> iterator() {
+    public  Iterator<Point> iterator() {
         return new Iterator() {
             int i = 0;
 
