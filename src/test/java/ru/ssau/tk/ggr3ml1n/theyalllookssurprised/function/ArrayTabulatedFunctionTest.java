@@ -72,8 +72,8 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testInterpolate() {
         AbstractTabulatedFunction testingInterpolate = new ArrayTabulatedFunction(xValues, yValues);
-        final double delta = 0.1;
-        assertEquals(testingInterpolate.interpolate(7.478, 1), 8.478, delta);
+        final double delta = 0.0001;
+        assertEquals(testingInterpolate.interpolate(7.450, 1), 8.478, delta);
         assertEquals(testingInterpolate.interpolate(7.473, 1), 8.473, delta);
         assertNotEquals(testingInterpolate.interpolate(68.247, 1), 4.237, delta);
         assertEquals(testingArrayFunction().interpolate(15, 3), 3.9, delta);
@@ -198,7 +198,7 @@ public class ArrayTabulatedFunctionTest {
         }
         assertEquals(testingIteratorWhileA.getCount(), i);
 
-        ArrayTabulatedFunction testingIteratorWhileB = testingArrayFunction();
+        ArrayTabulatedFunction testingIteratorWhileB = (ArrayTabulatedFunction) testingArrayFunction();
         myIterator = testingIteratorWhileB.iterator();
         i = 0;
         while (myIterator.hasNext()) {
@@ -220,7 +220,7 @@ public class ArrayTabulatedFunctionTest {
         }
         assertEquals(testingIteratorWhileA.getCount(), i);
 
-        ArrayTabulatedFunction testingIteratorWhileB = testingArrayFunction();
+        ArrayTabulatedFunction testingIteratorWhileB = (ArrayTabulatedFunction) testingArrayFunction();
         i = 0;
         for (Point myPoint : testingIteratorWhileB) {
             assertEquals(myPoint.x, testingIteratorWhileB.getX(i), delta);
