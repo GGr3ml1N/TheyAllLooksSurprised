@@ -12,6 +12,12 @@ public class LinkedListTabulatedFunctionTest {
     private final static double ACCURACY = 0.1;
     private final double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     private final double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
+    private LinkedListTabulatedFunction getListOfArray() {
+        return new LinkedListTabulatedFunction(xValues, yValues);
+    }
+    private LinkedListTabulatedFunction getListOfMathFunction() {
+        return new LinkedListTabulatedFunction(sqr, 0, 10, 101);
+    }
 
     private AbstractTabulatedFunction listFunction() {
         return new LinkedListTabulatedFunction(source, 1, 5, 5);
@@ -54,17 +60,20 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(testFunction.getCount(), 2);
     }
 
+
     @Test
     public void testInterpolate() {
-        assertEquals(listFunction().interpolate(2, listFunction().floorIndexOfX(2)), 1.41, DELTA);
-        assertEquals(listFunction().interpolate(2, listFunction().floorIndexOfX(2)), 1.414, DELTA);
-        assertEquals(listFunction().interpolate(4, listFunction().floorIndexOfX(4)), 2, DELTA);
-        assertEquals(getListFunction().interpolate(2, getListFunction().floorIndexOfX(2)), 1.41, ACCURACY);
-        assertEquals(getListFunction().interpolate(2, getListFunction().floorIndexOfX(2)), 1.41, ACCURACY);
-        assertEquals(getListFunction().interpolate(4, getListFunction().floorIndexOfX(4)), 2, ACCURACY);
-        assertThrows(InterpolationException.class, () -> listFunction().interpolate(2, 2));
-        assertThrows(InterpolationException.class, () -> getListFunction().interpolate(4, 4));
+        final double delta = 0.001;
+        assertEquals(getListOfArray().interpolate(1.23, getListOfArray().floorIndexOfX(1.23)), 2.23, delta);
+        assertEquals(getListOfArray().interpolate(1.15, getListOfArray().floorIndexOfX(1.15)), 2.15, delta);
+        assertNotEquals(getListOfArray().interpolate(1.33, getListOfArray().floorIndexOfX(1.33)), 8.43, delta);
+        assertEquals(getListOfMathFunction().interpolate(1.41, getListOfMathFunction().floorIndexOfX(1.41)), 1.187, delta);
+        assertEquals(getListOfMathFunction().interpolate(1.35, getListOfMathFunction().floorIndexOfX(1.35)), 1.161, delta);
+        assertNotEquals(getListOfMathFunction().interpolate(1.33, getListOfMathFunction().floorIndexOfX(1.33)), 8.43, delta);
+        assertThrows(InterpolationException.class, () -> getListOfArray().interpolate(0.5, 2));
+        assertThrows(InterpolationException.class, () -> getListOfMathFunction().interpolate(7.5, 3));
     }
+
 
     @Test
     public void testIndexOfY() {

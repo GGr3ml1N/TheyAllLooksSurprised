@@ -72,14 +72,15 @@ public class ArrayTabulatedFunctionTest {
     @Test
     public void testInterpolate() {
         AbstractTabulatedFunction testingInterpolate = new ArrayTabulatedFunction(xValues, yValues);
-        final double delta = 0.0001;
-        assertEquals(testingInterpolate.interpolate(7.450, 1), 8.478, delta);
-        assertEquals(testingInterpolate.interpolate(7.473, 1), 8.473, delta);
-        assertNotEquals(testingInterpolate.interpolate(68.247, 1), 4.237, delta);
-        assertEquals(testingArrayFunction().interpolate(15, 3), 3.9, delta);
-        assertEquals(testingArrayFunction().interpolate(19, 3), 4.49, delta);
-        assertNotEquals(testingArrayFunction().interpolate(11, 3), 121, delta);
-
+        final double delta = 0.1;
+        assertEquals(testingInterpolate.interpolate(1.23, testingInterpolate.floorIndexOfX(1.23)), 2.23, delta);
+        assertEquals(testingInterpolate.interpolate(1.15, testingInterpolate.floorIndexOfX(1.15)), 2.15, delta);
+        assertNotEquals(testingInterpolate.interpolate(1.33, testingInterpolate.floorIndexOfX(1.33)), 8.43, delta);
+        assertEquals(testingArrayFunction().interpolate(1.41, testingArrayFunction().floorIndexOfX(1.41)), 1.136, delta);
+        assertEquals(testingArrayFunction().interpolate(1.35, testingArrayFunction().floorIndexOfX(1.35)), 1.116, delta);
+        assertNotEquals(testingArrayFunction().interpolate(1.33, testingArrayFunction().floorIndexOfX(1.33)), 8.43, delta);
+        assertThrows(InterpolationException.class, () -> testingInterpolate.interpolate(0.5, 2));
+        assertThrows(InterpolationException.class, () -> testingArrayFunction().interpolate(7.5, 3));
     }
 
     @Test
