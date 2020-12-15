@@ -1,5 +1,5 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
-import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.InterpolationException;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -11,6 +11,12 @@ public class ArrayTabulatedFunctionTest {
     private final MathFunction source = new SqrtFunction();
     private AbstractTabulatedFunction testingArrayFunction() {
         return new ArrayTabulatedFunction(source, 1, 16, 6);
+    }
+    private ArrayTabulatedFunction getDefinedThroughArrays() {
+        return new ArrayTabulatedFunction(xValues, yValues);
+    }
+    private ArrayTabulatedFunction getDefinedThroughMathFunction() {
+        return new ArrayTabulatedFunction(source, 0, 27, 109);
     }
 
 
@@ -76,7 +82,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingInterpolate.interpolate(1.23, testingInterpolate.floorIndexOfX(1.23)), 2.23, delta);
         assertEquals(testingInterpolate.interpolate(1.15, testingInterpolate.floorIndexOfX(1.15)), 2.15, delta);
         assertNotEquals(testingInterpolate.interpolate(1.33, testingInterpolate.floorIndexOfX(1.33)), 8.43, delta);
-        assertEquals(testingArrayFunction().interpolate(1.41, testingArrayFunction().floorIndexOfX(1.41)), 1.136, delta);
+        assertEquals(testingArrayFunction().interpolate(1.41, testingArrayFunction().floorIndexOfX(1.41)), 1.136666, delta);
         assertEquals(testingArrayFunction().interpolate(1.35, testingArrayFunction().floorIndexOfX(1.35)), 1.116, delta);
         assertNotEquals(testingArrayFunction().interpolate(1.33, testingArrayFunction().floorIndexOfX(1.33)), 8.43, delta);
         assertThrows(InterpolationException.class, () -> testingInterpolate.interpolate(0.5, 2));
@@ -188,46 +194,44 @@ public class ArrayTabulatedFunctionTest {
     }
     @Test
     public void testIteratorWhile() {
-        final double delta = 0.0001;
-        ArrayTabulatedFunction testingIteratorWhileA = new ArrayTabulatedFunction(xValues, yValues);
-        Iterator<Point> myIterator = testingIteratorWhileA.iterator();
+        ArrayTabulatedFunction testDefinedThroughArrays = getDefinedThroughArrays();
+        Iterator<Point> myIterator = testDefinedThroughArrays.iterator();
         int i = 0;
         while (myIterator.hasNext()) {
             Point myPoint = myIterator.next();
-            assertEquals(testingIteratorWhileA.getX(i), myPoint.x, delta);
-            assertEquals(testingIteratorWhileA.getY(i++), myPoint.y, delta);
+            assertEquals(testDefinedThroughArrays.getX(i), myPoint.x);
+            assertEquals(testDefinedThroughArrays.getY(i++), myPoint.y);
         }
-        assertEquals(testingIteratorWhileA.getCount(), i);
+        assertEquals(testDefinedThroughArrays.getCount(), i);
 
-        ArrayTabulatedFunction testingIteratorWhileB = (ArrayTabulatedFunction) testingArrayFunction();
-        myIterator = testingIteratorWhileB.iterator();
+        ArrayTabulatedFunction testDefinedThroughMathFunction = getDefinedThroughMathFunction();
+        myIterator = testDefinedThroughMathFunction.iterator();
         i = 0;
         while (myIterator.hasNext()) {
             Point myPoint = myIterator.next();
-            assertEquals(testingIteratorWhileB.getX(i), myPoint.x, delta);
-            assertEquals(testingIteratorWhileB.getY(i++), myPoint.y, delta);
+            assertEquals(testDefinedThroughMathFunction.getX(i), myPoint.x);
+            assertEquals(testDefinedThroughMathFunction.getY(i++), myPoint.y);
         }
-        assertEquals(testingIteratorWhileB.getCount(), i);
+        assertEquals(testDefinedThroughMathFunction.getCount(), i);
     }
 
     @Test
     public void testIteratorForEach() {
-        final double delta = 0.0001;
-        ArrayTabulatedFunction testingIteratorWhileA = new ArrayTabulatedFunction(xValues, yValues);
+        ArrayTabulatedFunction testDefinedThroughArrays = getDefinedThroughArrays();
         int i = 0;
-        for (Point myPoint : testingIteratorWhileA) {
-            assertEquals(myPoint.x, testingIteratorWhileA.getX(i), delta);
-            assertEquals(myPoint.y, testingIteratorWhileA.getY(i++), delta);
+        for (Point myPoint : testDefinedThroughArrays) {
+            assertEquals(myPoint.x, testDefinedThroughArrays.getX(i));
+            assertEquals(myPoint.y, testDefinedThroughArrays.getY(i++));
         }
-        assertEquals(testingIteratorWhileA.getCount(), i);
+        assertEquals(testDefinedThroughArrays.getCount(), i);
 
-        ArrayTabulatedFunction testingIteratorWhileB = (ArrayTabulatedFunction) testingArrayFunction();
+        ArrayTabulatedFunction testDefinedThroughMathFunction = getDefinedThroughMathFunction();
         i = 0;
-        for (Point myPoint : testingIteratorWhileB) {
-            assertEquals(myPoint.x, testingIteratorWhileB.getX(i), delta);
-            assertEquals(myPoint.y, testingIteratorWhileB.getY(i++), delta);
+        for (Point myPoint : testDefinedThroughMathFunction) {
+            assertEquals(myPoint.x, testDefinedThroughMathFunction.getX(i));
+            assertEquals(myPoint.y, testDefinedThroughMathFunction.getY(i++));
         }
-        assertEquals(testingIteratorWhileB.getCount(), i);
+        assertEquals(testDefinedThroughMathFunction.getCount(), i);
     }
 
 }

@@ -1,6 +1,6 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
-import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.InterpolationException;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -12,6 +12,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("Length less than 2 points");
+        }
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
         count = xValues.length;
@@ -20,30 +23,31 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        this.count = count;
+        if (count < 2) {
+            throw new IllegalArgumentException("Length less than 2 points");
+        }
+        if ((xFrom >= xTo) || (xFrom < 0) | (xTo < 0)) {
+            throw new IllegalArgumentException("Incorrect parameter values");
+        }
+
         xValues = new double[count];
         yValues = new double[count];
-
-        double step = (xTo - xFrom) / (count - 1);
-        double xMomentValue = xFrom;
-
         for (int i = 0; i < count; i++) {
-
-            xValues[i] = xMomentValue;
-            yValues[i] = source.apply(xMomentValue);
-            xMomentValue += step;
+            xValues[i] = xFrom + i * (xTo - xFrom) / (count - 1);
+            yValues[i] = source.apply(xValues[i]);
         }
+        this.count = count;
     }
 
-    @Override
     public int getCount() {
         return count;
     }
 
+
     @Override
     protected int floorIndexOfX(double x) {
         if (x < xValues[0]) {
-            return 0;
+            throw new IllegalArgumentException("X is less than the left border");
         }
         for (int i = 0; i + 1 < count; i++) {
             if (xValues[i + 1] > x) {
@@ -55,17 +59,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double extrapolateLeft(double x) {
-        if (count == 1) {
-            return x;
-        }
+
         return interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
 
     @Override
     public double extrapolateRight(double x) {
-        if (count == 1) {
-            return yValues[1];
-        }
+
         return interpolate(x, xValues[count - 2], xValues[count - 1], yValues[count - 2], yValues[count - 1]);
     }
 
@@ -81,16 +81,20 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
+        checkIndex(index);
         return xValues[index];
     }
 
+
     @Override
     public double getY(int index) {
+        checkIndex(index);
         return yValues[index];
     }
 
     @Override
     public void setY(int index, double value) {
+        checkIndex(index);
         yValues[index] = value;
     }
 
@@ -125,8 +129,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public  Iterator<Point> iterator() {
-        return new Iterator() {
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
             int i = 0;
 
             @Override
@@ -145,4 +149,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
             }
         };
     }
+
+
+    private void checkIndex(int index) {
+        if (index < 0 || index > count - 1) {
+            throw new ArrayIndexOutOfBoundsException("Index out of bounds of array");
+        }
+    }
+
 }

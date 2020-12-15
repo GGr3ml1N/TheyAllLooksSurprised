@@ -1,8 +1,10 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
-import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.InterpolationException;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 
 import java.util.Iterator;
+
+import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
@@ -33,6 +35,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length < 2) {
+            throw new IllegalArgumentException("Length less than 2 points");
+        }
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
         for (int i = 0; i < xValues.length; i++) {
@@ -41,6 +46,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("Length less than 2 points");
+        }
+        if ((xFrom >= xTo) || (xFrom < 0) | (xTo < 0)) {
+            throw new IllegalArgumentException("Incorrect parameter values");
+        }
         this.count = count;
         final double step = (xTo - xFrom) / (count - 1);
         double a = xFrom;
@@ -101,9 +112,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (head.x == head.prev.x) {
-            return head.y;
-        }
+
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
         if (x < leftNode.x || x > rightNode.x) {
@@ -139,16 +148,20 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
+        checkIndex(index);
+
         return getNode(index).x;
     }
 
     @Override
     public double getY(int index) {
+        checkIndex(index);
         return getNode(index).y;
     }
 
     @Override
     public void setY(int index, double value) {
+        checkIndex(index);
         getNode(index).y = value;
     }
 
@@ -165,7 +178,34 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
+        return new Iterator<Point>() {
+            Node node = head;
+
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(node.x, node.y);
+                if (node == head.prev) {
+                    node = null;
+                } else {
+                    node = node.next;
+                }
+                return point;
+            }
+        };
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index > count - 1) {
+            throw new ArrayIndexOutOfBoundsException("Index out of bounds of array");
+        }
     }
 }
 

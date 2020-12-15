@@ -1,8 +1,8 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 
-import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.ArrayIsNotSortedException;
-import ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions.DifferentLengthOfArraysException;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.ArrayIsNotSortedException;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.DifferentLengthOfArraysException;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected int count;

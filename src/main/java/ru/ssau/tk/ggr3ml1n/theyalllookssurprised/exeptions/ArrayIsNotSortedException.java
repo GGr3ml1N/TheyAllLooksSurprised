@@ -1,4 +1,4 @@
-package ru.ssau.tk.ggr3ml1n.theyalllookssurpriswd.exeptions;
+package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions;
 
 public class ArrayIsNotSortedException extends RuntimeException{
     public ArrayIsNotSortedException() {
