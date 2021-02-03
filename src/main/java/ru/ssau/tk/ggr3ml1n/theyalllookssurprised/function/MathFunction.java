@@ -1,6 +1,6 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
-interface MathFunction {
+public interface MathFunction {
 
     double apply(double x);
 
