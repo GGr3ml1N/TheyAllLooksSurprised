@@ -95,15 +95,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (head.x == head.prev.x) {
             return head.x;
         }
-        return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
+        return interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }
+
 
     @Override
     protected double extrapolateLeft(double x) {
         if (head.x == head.prev.x) {
             return head.x;
         }
-        return interpolate(x, head.x, head.next.x, head.y, head.next.y);
+        return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
 
     public int getCount() {
@@ -112,12 +113,11 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-
+        if (head.x == head.prev.x) {
+            return head.y;
+        }
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
-        if (x < leftNode.x || x > rightNode.x) {
-            throw new InterpolationException("X is out of bounds of interpolation");
-        }
         return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
     }
 
@@ -148,20 +148,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
-        checkIndex(index);
-
         return getNode(index).x;
     }
 
     @Override
     public double getY(int index) {
-        checkIndex(index);
         return getNode(index).y;
     }
 
     @Override
     public void setY(int index, double value) {
-        checkIndex(index);
         getNode(index).y = value;
     }
 

@@ -58,10 +58,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    public double extrapolateLeft(double x) {
-
+        protected double extrapolateLeft(double x) {
+        if (count == 1) {
+            return x;
+        }
         return interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
+
 
     @Override
     public double extrapolateRight(double x) {
@@ -71,9 +74,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
-            throw new InterpolationException("X is out of bounds of interpolation");
-        }
 
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
@@ -81,20 +81,17 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
     @Override
     public double getX(int index) {
-        checkIndex(index);
         return xValues[index];
     }
 
 
     @Override
     public double getY(int index) {
-        checkIndex(index);
         return yValues[index];
     }
 
     @Override
     public void setY(int index, double value) {
-        checkIndex(index);
         yValues[index] = value;
     }
 
@@ -151,10 +148,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
 
-    private void checkIndex(int index) {
-        if (index < 0 || index > count - 1) {
-            throw new ArrayIndexOutOfBoundsException("Index out of bounds of array");
-        }
-    }
+
 
 }

@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunctionTest {
     double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
@@ -16,7 +17,7 @@ public class ArrayTabulatedFunctionTest {
         return new ArrayTabulatedFunction(xValues, yValues);
     }
     private ArrayTabulatedFunction getDefinedThroughMathFunction() {
-        return new ArrayTabulatedFunction(source, 0, 27, 109);
+        return new ArrayTabulatedFunction(source, 1, 16, 6);
     }
 
 
@@ -48,6 +49,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingArrayFunction().floorIndexOfX(8.93), 2);
         assertEquals(testingArrayFunction().floorIndexOfX(66.67), 6);
         assertNotEquals(testingArrayFunction().floorIndexOfX(66.67), 4);
+        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(1));
+        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-3));
+        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-10));
+        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-4));
     }
 
     @Test

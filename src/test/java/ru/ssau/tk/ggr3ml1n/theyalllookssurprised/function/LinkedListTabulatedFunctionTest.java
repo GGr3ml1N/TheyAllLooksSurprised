@@ -46,14 +46,14 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testExtrapolateRight() {
-        assertEquals(listFunction().extrapolateRight(4), 2, DELTA);
-        assertEquals(getListFunction().extrapolateRight(40), 10.49, ACCURACY);
+        assertEquals(listFunction().extrapolateRight(4), 2.24, DELTA);
+        assertEquals(getListFunction().extrapolateRight(40), 17.1543, ACCURACY);
     }
 
     @Test
     public void testExtrapolateLeft() {
-        assertEquals(listFunction().extrapolateLeft(0), 0.58578, DELTA);
-        assertEquals(getListFunction().extrapolateLeft(0), 0.58578, ACCURACY);
+        assertEquals(listFunction().extrapolateLeft(0), 1.0557, DELTA);
+        assertEquals(getListFunction().extrapolateLeft(0), 1.0557, ACCURACY);
 
     }
 
@@ -76,7 +76,7 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(getListOfMathFunction().interpolate(1.41, getListOfMathFunction().floorIndexOfX(1.41)), 1.185, delta);
         assertEquals(getListOfMathFunction().interpolate(1.35, getListOfMathFunction().floorIndexOfX(1.35)), 1.158, delta);
         assertNotEquals(getListOfMathFunction().interpolate(1.33, getListOfMathFunction().floorIndexOfX(1.33)), 8.43, delta);
-        assertThrows(InterpolationException.class, () -> listFunction().interpolate(2, 2));
+        assertThrows(InterpolationException.class, () -> listFunction().interpolate(2, -2));
         assertThrows(InterpolationException.class, () -> getListFunction().interpolate(4, 4));
     }
 
@@ -141,7 +141,7 @@ public class LinkedListTabulatedFunctionTest {
         assertNotEquals(testingApply.apply(7.82), 1.23, delta);
         assertNotEquals(testingApply.apply(1.22), 1.23, delta);
 
-        assertEquals(listFunction().apply(-1.0), 0.17, delta);
+        assertEquals(listFunction().apply(-1.0), 0.81, delta);
         assertEquals(listFunction().apply(1.5), 1.2, delta);
         assertEquals(listFunction().apply(1.1), 1.04, delta);
         assertEquals(listFunction().apply(1.4), 1.16, delta);
