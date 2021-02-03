@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import static org.testng.Assert.*;
 
+
 public class LinkedListTabulatedFunctionTest {
     private final MathFunction source = new SqrtFunction();
     private final static double DELTA = 0.1;
