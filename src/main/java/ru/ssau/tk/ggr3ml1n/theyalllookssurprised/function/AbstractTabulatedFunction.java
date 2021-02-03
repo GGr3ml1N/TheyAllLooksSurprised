@@ -4,7 +4,11 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.DifferentLengthOfArraysException;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction {
+import java.io.Serializable;
+
+public abstract class AbstractTabulatedFunction implements TabulatedFunction, Serializable {
+
+    private static final long serialVersionUID = 6774919160548622675L;
     protected int count;
 
     protected abstract int floorIndexOfX(double x);
@@ -18,6 +22,22 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
     protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         return leftY + (rightY - leftY) * (x - leftX) / (rightX - leftX);
     }
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append(getClass().getSimpleName()).append(" size = ").append(this.getCount()).append("\n");
+
+        for (Point point : this) {
+            str.append("[")
+                    .append(point.x)
+                    .append("; ")
+                    .append(point.y)
+                    .append("]\n");
+        }
+        str.deleteCharAt(str.length() - 1);
+        return str.toString();
+    }
+
 
     public double apply(double x) {
         if (x < leftBound()) {

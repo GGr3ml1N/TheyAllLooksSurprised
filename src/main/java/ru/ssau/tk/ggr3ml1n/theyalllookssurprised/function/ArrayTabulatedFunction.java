@@ -2,12 +2,13 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
-    protected int count;
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements  Serializable {
+    private static final long serialVersionUID = 925973407340487180L;;
     protected double[] xValues;
     protected double[] yValues;
 

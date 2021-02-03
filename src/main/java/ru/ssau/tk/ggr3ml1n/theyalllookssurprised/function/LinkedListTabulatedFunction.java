@@ -2,14 +2,18 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+
+    private static final long serialVersionUID = 4099715325863317331L;
     private Node head;
 
-    protected static class Node {
+    protected static class Node implements Serializable {
+        private static final long serialVersionUID = 1465232404893441735L;
         public Node next;
         public Node prev;
         public double x;
