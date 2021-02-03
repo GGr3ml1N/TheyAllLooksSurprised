@@ -117,12 +117,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if (head.x == head.prev.x) {
-            return head.y;
+        Node left = getNode(floorIndex);
+        Node right = left.next;
+        if (x < head.x || x > head.prev.x) {
+            throw new InterpolationException("X is out of bounds of interpolation");
         }
-        Node leftNode = getNode(floorIndex);
-        Node rightNode = leftNode.next;
-        return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
+        return interpolate(x, left.x, right.x, left.y, right.y);
     }
 
 
@@ -202,11 +202,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         };
     }
 
-    private void checkIndex(int index) {
-        if (index < 0 || index > count - 1) {
-            throw new ArrayIndexOutOfBoundsException("Index out of bounds of array");
-        }
-    }
 }
 
 

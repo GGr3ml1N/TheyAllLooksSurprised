@@ -1,4 +1,6 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.ArrayIsNotSortedException;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 import org.testng.annotations.Test;
 
@@ -50,7 +52,7 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingArrayFunction().floorIndexOfX(66.67), 6);
         assertNotEquals(testingArrayFunction().floorIndexOfX(66.67), 4);
         assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-1));
-        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(1));
+        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-1));
         assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-3));
         assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-1));
         assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-10));
@@ -240,5 +242,15 @@ public class ArrayTabulatedFunctionTest {
         }
         assertEquals(testDefinedThroughMathFunction.getCount(), i);
     }
-
+    @Test
+    public void testConstructorExceptions() {
+        final double[] brokenValues = {1, -1, 0};
+        final double[] brokenValuesToo = {1, 8, 2};
+        final double[] singleElementArray = {1};
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(singleElementArray, yValues));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(brokenValues, yValues));
+        assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(brokenValues, brokenValues));
+        assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(brokenValuesToo, brokenValuesToo));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(source, 21, 16, 10));
+    }
 }

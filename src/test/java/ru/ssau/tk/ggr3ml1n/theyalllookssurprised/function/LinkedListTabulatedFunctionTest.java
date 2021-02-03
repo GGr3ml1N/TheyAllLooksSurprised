@@ -40,7 +40,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testFloorIndexOfX() {
-        assertEquals(listFunction().floorIndexOfX(2), 0, DELTA);
+        assertEquals(listFunction().floorIndexOfX(1), 0, DELTA);
         assertEquals(getListFunction().floorIndexOfX(5), 3, DELTA);
 
     }
@@ -77,8 +77,8 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(getListOfMathFunction().interpolate(1.41, getListOfMathFunction().floorIndexOfX(1.41)), 1.185, delta);
         assertEquals(getListOfMathFunction().interpolate(1.35, getListOfMathFunction().floorIndexOfX(1.35)), 1.158, delta);
         assertNotEquals(getListOfMathFunction().interpolate(1.33, getListOfMathFunction().floorIndexOfX(1.33)), 8.43, delta);
-        assertThrows(InterpolationException.class, () -> listFunction().interpolate(2, -2));
-        assertThrows(InterpolationException.class, () -> getListFunction().interpolate(4, 4));
+        assertThrows(InterpolationException.class, () -> listFunction().interpolate(0.5, 4));
+        assertThrows(InterpolationException.class, () -> getListFunction().interpolate(0.2, 1));
     }
 
 

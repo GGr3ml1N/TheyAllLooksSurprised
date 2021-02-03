@@ -7,8 +7,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements  Serializable {
-    private static final long serialVersionUID = 925973407340487180L;;
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
+    private static final long serialVersionUID = 925973407340487180L;
+
     protected double[] xValues;
     protected double[] yValues;
 
@@ -59,7 +60,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     @Override
-        protected double extrapolateLeft(double x) {
+    protected double extrapolateLeft(double x) {
         if (count == 1) {
             return x;
         }
@@ -75,7 +76,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-
+        if (x < xValues[floorIndex] || x > xValues[floorIndex + 1]) {
+            throw new InterpolationException("X is out of bounds of interpolation");
+        }
         return interpolate(x, xValues[floorIndex], xValues[floorIndex + 1], yValues[floorIndex], yValues[floorIndex + 1]);
     }
 
@@ -147,8 +150,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             }
         };
     }
-
-
 
 
 }
