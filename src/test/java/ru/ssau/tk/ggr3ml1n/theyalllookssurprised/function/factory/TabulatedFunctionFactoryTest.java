@@ -11,7 +11,6 @@ public class TabulatedFunctionFactoryTest {
 
     @Test
     public void testCreate() {
-    }{
         double[] x = {1, 2, 3, 4, 5};
         double[] y = {10, 20, 30, 40, 50};
         TabulatedFunctionFactory listFactory = new LinkedListTabulatedFunctionFactory();
