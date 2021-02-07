@@ -32,11 +32,21 @@ public final class FunctionsIO {
         return factory.create(xValues, yValues);
     }
 
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
+        DataInputStream in = new DataInputStream(inputStream);
+        int count = in.readInt();
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        for (int i = 0; i < count; i++) {
+            xValues[i] = in.readDouble();
+            yValues[i] = in.readDouble();
+        }
+        return factory.create(xValues, yValues);
+    }
 
     public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
         PrintWriter printWriter = new PrintWriter(writer);
         printWriter.println(function.getCount());
-        int i = 0;
         for (Point a : function) {
             printWriter.printf("%f %f\n", a.x, a.y);
         }
@@ -52,22 +62,14 @@ public final class FunctionsIO {
         }
         out.flush();
     }
-    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
-        DataInputStream in = new DataInputStream(inputStream);
-        int count = in.readInt();
-        double[] xValues = new double[count];
-        double[] yValues = new double[count];
-        for (int i = 0; i < count; i++) {
-            xValues[i] = in.readDouble();
-            yValues[i] = in.readDouble();
-        }
-        return factory.create(xValues, yValues);
-    }
+
+
     public static void serialize(BufferedOutputStream stream, TabulatedFunction function) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(stream);
         out.writeObject(function);
         out.flush();
     }
+
     public static TabulatedFunction deserialize(BufferedInputStream stream) throws IOException, ClassNotFoundException {
         return (TabulatedFunction) new ObjectInputStream(stream).readObject();
     }
