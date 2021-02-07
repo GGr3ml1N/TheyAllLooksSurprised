@@ -11,8 +11,8 @@ import java.io.IOException;
 
 public class TabulatedFunctionFileWriter {
     public static void main(String[] args) {
-        File fileArray = new File("output/array function.txt");
-        File fileList = new File("output/linked list function.txt");
+        File fileArray = new File("output/array function.txt.rtf");
+        File fileList = new File("output/linked list function.txt.rtf");
 
         double[] xValue = new double[]{1, 2, 3, 4, 5};
         double[] yValue = new double[]{2, 4, 6, 8, 10};
