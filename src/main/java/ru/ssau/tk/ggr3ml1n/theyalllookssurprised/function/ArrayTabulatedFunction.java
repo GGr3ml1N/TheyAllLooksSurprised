@@ -61,9 +61,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     protected double extrapolateLeft(double x) {
-        if (count == 1) {
-            return x;
-        }
+
         return interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
 
