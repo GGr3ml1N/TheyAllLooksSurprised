@@ -1,10 +1,12 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
+
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.ArrayIsNotSortedException;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -12,12 +14,15 @@ public class ArrayTabulatedFunctionTest {
     double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
     private final MathFunction source = new SqrtFunction();
+
     private AbstractTabulatedFunction testingArrayFunction() {
         return new ArrayTabulatedFunction(source, 1, 16, 6);
     }
+
     private ArrayTabulatedFunction getDefinedThroughArrays() {
         return new ArrayTabulatedFunction(xValues, yValues);
     }
+
     private ArrayTabulatedFunction getDefinedThroughMathFunction() {
         return new ArrayTabulatedFunction(source, 1, 16, 6);
     }
@@ -51,12 +56,12 @@ public class ArrayTabulatedFunctionTest {
         assertEquals(testingArrayFunction().floorIndexOfX(8.93), 2);
         assertEquals(testingArrayFunction().floorIndexOfX(66.67), 6);
         assertNotEquals(testingArrayFunction().floorIndexOfX(66.67), 4);
-        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-1));
-        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-1));
-        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughArrays().floorIndexOfX(-3));
-        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-1));
-        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-10));
-        assertThrows(IllegalArgumentException.class, () ->  getDefinedThroughMathFunction().floorIndexOfX(-4));
+        assertThrows(IllegalArgumentException.class, () -> getDefinedThroughArrays().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () -> getDefinedThroughArrays().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () -> getDefinedThroughArrays().floorIndexOfX(-3));
+        assertThrows(IllegalArgumentException.class, () -> getDefinedThroughMathFunction().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () -> getDefinedThroughMathFunction().floorIndexOfX(-10));
+        assertThrows(IllegalArgumentException.class, () -> getDefinedThroughMathFunction().floorIndexOfX(-4));
     }
 
     @Test
@@ -201,6 +206,7 @@ public class ArrayTabulatedFunctionTest {
         assertNotEquals(testingArrayFunction().rightBound(), 27, delta);
 
     }
+
     @Test
     public void testIteratorWhile() {
         ArrayTabulatedFunction testDefinedThroughArrays = getDefinedThroughArrays();
@@ -211,6 +217,11 @@ public class ArrayTabulatedFunctionTest {
             assertEquals(testDefinedThroughArrays.getX(i), myPoint.x);
             assertEquals(testDefinedThroughArrays.getY(i++), myPoint.y);
         }
+
+        Iterator<Point> finalMyFirstIterator = myIterator;
+        assertThrows(NoSuchElementException.class, () -> {
+            finalMyFirstIterator.next();
+        });
         assertEquals(testDefinedThroughArrays.getCount(), i);
 
         ArrayTabulatedFunction testDefinedThroughMathFunction = getDefinedThroughMathFunction();
@@ -221,7 +232,12 @@ public class ArrayTabulatedFunctionTest {
             assertEquals(testDefinedThroughMathFunction.getX(i), myPoint.x);
             assertEquals(testDefinedThroughMathFunction.getY(i++), myPoint.y);
         }
+        Iterator<Point> finalMySecondIterator = myIterator;
+        assertThrows(NoSuchElementException.class, () -> {
+            finalMySecondIterator.next();
+        });
         assertEquals(testDefinedThroughMathFunction.getCount(), i);
+
     }
 
     @Test
@@ -242,6 +258,7 @@ public class ArrayTabulatedFunctionTest {
         }
         assertEquals(testDefinedThroughMathFunction.getCount(), i);
     }
+
     @Test
     public void testConstructorExceptions() {
         final double[] brokenValues = {1, -1, 0};
@@ -252,5 +269,6 @@ public class ArrayTabulatedFunctionTest {
         assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(brokenValues, brokenValues));
         assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(brokenValuesToo, brokenValuesToo));
         assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(source, 21, 16, 10));
+        assertThrows(IllegalArgumentException.class, () -> new ArrayTabulatedFunction(source, 1, 6, 1));
     }
 }
