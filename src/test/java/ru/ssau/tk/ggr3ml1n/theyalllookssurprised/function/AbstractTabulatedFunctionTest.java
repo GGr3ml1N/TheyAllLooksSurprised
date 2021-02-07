@@ -29,11 +29,12 @@ public class AbstractTabulatedFunctionTest {
         assertEquals(mockedApply.apply(4.0), 4.0, delta);
         assertNotEquals(mockedApply.apply(1.3), 5.2);
     }
+
     @Test
     public void testCheckLengthIsTheSame() {
         assertThrows(DifferentLengthOfArraysException.class, () -> {
             double[] valuesX = new double[]{8, 78};
-            double[] valuesY = new double[]{13, 14,-3};
+            double[] valuesY = new double[]{13, 14, -3};
             AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
             double[] valuesNewX = new double[]{1, 3};
             double[] valuesNewY = new double[]{2, 4};
@@ -45,7 +46,7 @@ public class AbstractTabulatedFunctionTest {
     public void testCheckSorted() {
 
         assertThrows(ArrayIsNotSortedException.class, () -> {
-            double[] xValues = new double[]{-10,-80, 5, 18, 90};
+            double[] xValues = new double[]{-10, -80, 5, 18, 90};
             AbstractTabulatedFunction.checkSorted(xValues);
             double[] xNewValues = new double[]{1, 3, 7, 9};
             AbstractTabulatedFunction.checkSorted(xNewValues);

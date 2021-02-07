@@ -11,7 +11,6 @@ public class ConstantFunctionTest {
     ConstantFunction testFunction1 = new ConstantFunction(15.1);
 
 
-
     @Test
     public void testApply() {
         assertEquals(testFunction.apply(4.111), 4.11, DELTA);

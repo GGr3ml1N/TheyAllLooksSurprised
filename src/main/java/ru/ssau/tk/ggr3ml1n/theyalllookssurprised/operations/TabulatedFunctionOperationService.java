@@ -33,6 +33,7 @@ public class TabulatedFunctionOperationService {
         }
         return points;
     }
+
     private interface BiOperation {
         double apply(double u, double v);
     }
@@ -64,6 +65,7 @@ public class TabulatedFunctionOperationService {
     public TabulatedFunction subtract(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (u, v) -> u - v);
     }
+
     public TabulatedFunction multiply(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (u, v) -> u * v);
     }

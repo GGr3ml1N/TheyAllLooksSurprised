@@ -79,10 +79,12 @@ public class MockTabulatedFunction extends AbstractTabulatedFunction {
     public double rightBound() {
         return x1;
     }
+
     @Override
     public int getCount() {
         return 2;
     }
+
     @Override
     public Iterator<Point> iterator() {
         throw new UnsupportedOperationException();

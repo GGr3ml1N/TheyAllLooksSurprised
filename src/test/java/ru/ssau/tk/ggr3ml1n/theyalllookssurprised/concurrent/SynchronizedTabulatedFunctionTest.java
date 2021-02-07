@@ -120,6 +120,7 @@ public class SynchronizedTabulatedFunctionTest {
         assertThrows(NoSuchElementException.class, it1::next);
 
     }
+
     @Test
     public void testIteratorForEach() {
         int i = 0;

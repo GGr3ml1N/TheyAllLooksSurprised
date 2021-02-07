@@ -17,18 +17,18 @@ public class TabulatedFunctionFileOutputStream {
         double[] xValue = new double[]{1.1, 1.2, 1.3, 1.4, 1.5};
         double[] yValue = new double[]{2.1, 2.2, 2.3, 2.4, 2.5};
 
-        TabulatedFunction functionList = new LinkedListTabulatedFunction(xValue,yValue);
+        TabulatedFunction functionList = new LinkedListTabulatedFunction(xValue, yValue);
         TabulatedFunction functionArray = new ArrayTabulatedFunction(xValue, yValue);
 
-        try(BufferedOutputStream outArray = new BufferedOutputStream(
+        try (BufferedOutputStream outArray = new BufferedOutputStream(
                 new FileOutputStream(fileArray));
-            BufferedOutputStream outList = new BufferedOutputStream(
-                    new FileOutputStream(fileList))){
+             BufferedOutputStream outList = new BufferedOutputStream(
+                     new FileOutputStream(fileList))) {
 
             FunctionsIO.writeTabulatedFunction(outArray, functionArray);
             FunctionsIO.writeTabulatedFunction(outList, functionList);
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

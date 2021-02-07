@@ -2,7 +2,7 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.operations;
 
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function.MathFunction;
 
-public class LeftSteppingDifferentialOperator extends SteppingDifferentialOperator{
+public class LeftSteppingDifferentialOperator extends SteppingDifferentialOperator {
 
     public LeftSteppingDifferentialOperator(double step) {
         super(step);

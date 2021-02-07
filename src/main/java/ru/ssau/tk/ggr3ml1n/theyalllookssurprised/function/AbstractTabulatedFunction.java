@@ -22,6 +22,7 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction, Se
     protected double interpolate(double x, double leftX, double rightX, double leftY, double rightY) {
         return leftY + (rightY - leftY) * (x - leftX) / (rightX - leftX);
     }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
@@ -51,7 +52,8 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction, Se
         }
         return (interpolate(x, floorIndexOfX(x)));
     }
-   protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
+
+    protected static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length) {
             throw new DifferentLengthOfArraysException("Lengths of xValues and yValues are different");
         }
