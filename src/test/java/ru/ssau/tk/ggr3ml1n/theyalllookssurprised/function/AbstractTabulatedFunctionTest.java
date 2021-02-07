@@ -35,21 +35,31 @@ public class AbstractTabulatedFunctionTest {
             double[] valuesX = new double[]{8, 78};
             double[] valuesY = new double[]{13, 14,-3};
             AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
+            double[] valuesNewX = new double[]{1, 3};
+            double[] valuesNewY = new double[]{2, 4};
+            AbstractTabulatedFunction.checkLengthIsTheSame(valuesNewX, valuesNewY);
         });
     }
 
     @Test
     public void testCheckSorted() {
+
         assertThrows(ArrayIsNotSortedException.class, () -> {
-            double[] valuesX = new double[]{-80, -100, 5, 18, 90};
-            AbstractTabulatedFunction.checkSorted(valuesX);
+            double[] xValues = new double[]{-10,-80, 5, 18, 90};
+            AbstractTabulatedFunction.checkSorted(xValues);
+            double[] xNewValues = new double[]{1, 3, 7, 9};
+            AbstractTabulatedFunction.checkSorted(xNewValues);
         });
     }
+
     @Test
     public void testTestToString() {
         double[] x = {1.1, 1.2, 1.3};
         double[] y = {2.1, 2.2, 2.3};
         assertEquals(new ArrayTabulatedFunction(x, y).toString(), "ArrayTabulatedFunction size = 3\n[1.1; 2.1]\n[1.2; 2.2]\n[1.3; 2.3]");
         assertEquals(new LinkedListTabulatedFunction(x, y).toString(), "LinkedListTabulatedFunction size = 3\n[1.1; 2.1]\n[1.2; 2.2]\n[1.3; 2.3]");
+        assertNotEquals(new ArrayTabulatedFunction(x, y).toString(), "ArrayTabulatedFunction size = 2\n[1.1; 2.1]\n[1.2; 2.2]\n[1.3; 2.3]");
+        assertNotEquals(new LinkedListTabulatedFunction(x, y).toString(), "LinkedListTabulatedFunction size = 2\n[1.1; 2.1]\n[1.2; 2.2]\n[1.3; 2.3]");
     }
+
 }
