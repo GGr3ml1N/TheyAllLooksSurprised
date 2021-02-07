@@ -56,14 +56,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if ((xFrom >= xTo) || (xFrom < 0) | (xTo < 0)) {
             throw new IllegalArgumentException("Incorrect parameter values");
         }
-        this.count = count;
+        double[] xValues = new double[count];
+        xValues[0] = xFrom;
         final double step = (xTo - xFrom) / (count - 1);
-        double a = xFrom;
-        for (int i = 0; i < count; i++) {
-            this.addNode(a, source.apply(a));
-            a += step;
+        this.addNode(xValues[0], source.apply(xValues[0]));
+        for (int i = 1; i < count; i++) {
+            xValues[i] = xValues[i - 1] + step;
+            this.addNode(xValues[i], source.apply(xValues[i]));
         }
     }
+
 
     @Override
     public double leftBound() {
@@ -77,8 +79,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected int floorIndexOfX(double x) {
-        if (x < head.x) {
-            throw new IllegalArgumentException("X is beyond the left border");
+        if (x < leftBound()) {
+            throw new IllegalArgumentException("X is less than the left border");
         }
         Node indexNode = head;
         for (int i = 0; i < count; i++) {
@@ -96,18 +98,14 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double extrapolateRight(double x) {
-        if (head.x == head.prev.x) {
-            return head.x;
-        }
+
         return interpolate(x, head.x, head.next.x, head.y, head.next.y);
     }
 
 
     @Override
     protected double extrapolateLeft(double x) {
-        if (head.x == head.prev.x) {
-            return head.x;
-        }
+
         return interpolate(x, head.prev.prev.x, head.prev.x, head.prev.prev.y, head.prev.y);
     }
 

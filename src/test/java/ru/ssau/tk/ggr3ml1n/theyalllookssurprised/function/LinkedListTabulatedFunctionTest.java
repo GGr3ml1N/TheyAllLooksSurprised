@@ -1,9 +1,12 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function;
 
 import org.testng.annotations.Test;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.ArrayIsNotSortedException;
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.DifferentLengthOfArraysException;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.exeptions.InterpolationException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.testng.Assert.*;
 
@@ -15,12 +18,15 @@ public class LinkedListTabulatedFunctionTest {
     private final static double ACCURACY = 0.1;
     private final double[] xValues = new double[]{1.0, 1.1, 1.2, 1.3, 1.4};
     private final double[] yValues = new double[]{2.0, 2.1, 2.2, 2.3, 2.4};
+
     private LinkedListTabulatedFunction getListOfArray() {
         return new LinkedListTabulatedFunction(xValues, yValues);
     }
+
     private LinkedListTabulatedFunction getListOfMathFunction() {
         return new LinkedListTabulatedFunction(sqr, 1, 10, 20);
     }
+
     private LinkedListTabulatedFunction getArrayListFunction() {
         return new LinkedListTabulatedFunction(xValues, yValues);
     }
@@ -42,6 +48,12 @@ public class LinkedListTabulatedFunctionTest {
     public void testFloorIndexOfX() {
         assertEquals(listFunction().floorIndexOfX(1), 0, DELTA);
         assertEquals(getListFunction().floorIndexOfX(5), 3, DELTA);
+        assertThrows(IllegalArgumentException.class, () -> getArrayListFunction().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () -> getArrayListFunction().floorIndexOfX(-5));
+        assertThrows(IllegalArgumentException.class, () -> getArrayListFunction().floorIndexOfX(-3));
+        assertThrows(IllegalArgumentException.class, () -> getArrayListFunction().floorIndexOfX(-1));
+        assertThrows(IllegalArgumentException.class, () -> getArrayListFunction().floorIndexOfX(-10));
+        assertThrows(IllegalArgumentException.class, () -> getArrayListFunction().floorIndexOfX(-4));
 
     }
 
@@ -150,6 +162,7 @@ public class LinkedListTabulatedFunctionTest {
 
         assertNotEquals(listFunction().apply(7.25), 59.25, delta);
     }
+
     @Test
     public void testIteratorWhile() {
         LinkedListTabulatedFunction testArrayList = getListOfArray();
@@ -160,7 +173,14 @@ public class LinkedListTabulatedFunctionTest {
             assertEquals(testArrayList.getX(k), myPoint.x, DELTA);
             assertEquals(testArrayList.getY(k++), myPoint.y, DELTA);
         }
+
+        Iterator<Point> finalMyFirstIterator = myIterator;
+        assertThrows(NoSuchElementException.class, () -> {
+            finalMyFirstIterator.next();
+
+        });
         assertEquals(testArrayList.getCount(), k);
+
         LinkedListTabulatedFunction testFunctionList = getArrayListFunction();
         Iterator<Point> myIteratorToo = testFunctionList.iterator();
         int s = 0;
@@ -169,8 +189,13 @@ public class LinkedListTabulatedFunctionTest {
             assertEquals(myPoint.x, testFunctionList.getX(s), DELTA);
             assertEquals(myPoint.y, testFunctionList.getY(s++), DELTA);
         }
+        Iterator<Point> finalMySecondIterator = myIterator;
+        assertThrows(NoSuchElementException.class, () -> {
+            finalMySecondIterator.next();
+        });
         assertEquals(testFunctionList.getCount(), s);
     }
+
     @Test
     public void testIteratorForEach() {
         LinkedListTabulatedFunction testArrayList = getListOfArray();
@@ -188,4 +213,18 @@ public class LinkedListTabulatedFunctionTest {
         }
         assertEquals(testFunctionList.getCount(), s);
     }
+
+    @Test
+    public void testConstructorExceptions() {
+        final double[] brokenValues = {1, -1, 0};
+        final double[] brokenValuesToo = {1, 1, 3};
+        final double[] singleElementArray = {1};
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(singleElementArray, yValues));
+        assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(brokenValues, yValues));
+        assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(brokenValues, brokenValues));
+        assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(brokenValuesToo, brokenValuesToo));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(source, 21, 16, 10));
+        assertThrows(IllegalArgumentException.class, () -> new LinkedListTabulatedFunction(source, 1, 7, 1));
+    }
+
 }
