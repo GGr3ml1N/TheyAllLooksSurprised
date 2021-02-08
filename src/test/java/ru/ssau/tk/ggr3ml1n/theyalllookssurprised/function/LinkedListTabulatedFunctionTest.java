@@ -72,11 +72,11 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     public void testGetCount() {
-        assertEquals(listFunction().getCount(), 10, DELTA);
-        assertEquals(getListFunction().getCount(), 10, ACCURACY);
+        assertEquals(listFunction().getCount(), 5, DELTA);
+        assertEquals(getListFunction().getCount(), 5, ACCURACY);
         final AbstractTabulatedFunction testFunction = new LinkedListTabulatedFunction(sqr, 0, 4, 2);
-        assertEquals(getFunction().getCount(), 14);
-        assertEquals(testFunction.getCount(), 4);
+        assertEquals(getFunction().getCount(), 7);
+        assertEquals(testFunction.getCount(), 2);
     }
 
 

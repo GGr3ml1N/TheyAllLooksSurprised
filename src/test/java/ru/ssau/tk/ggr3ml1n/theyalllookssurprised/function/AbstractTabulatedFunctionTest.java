@@ -36,10 +36,11 @@ public class AbstractTabulatedFunctionTest {
             double[] valuesX = new double[]{8, 78};
             double[] valuesY = new double[]{13, 14, -3};
             AbstractTabulatedFunction.checkLengthIsTheSame(valuesX, valuesY);
-            double[] valuesNewX = new double[]{1, 3};
-            double[] valuesNewY = new double[]{2, 4};
-            AbstractTabulatedFunction.checkLengthIsTheSame(valuesNewX, valuesNewY);
+
         });
+        double[] valuesNewX = new double[]{1, 3};
+        double[] valuesNewY = new double[]{2, 4};
+        AbstractTabulatedFunction.checkLengthIsTheSame(valuesNewX, valuesNewY);
     }
 
     @Test
@@ -48,9 +49,9 @@ public class AbstractTabulatedFunctionTest {
         assertThrows(ArrayIsNotSortedException.class, () -> {
             double[] xValues = new double[]{-10, -80, 5, 18, 90};
             AbstractTabulatedFunction.checkSorted(xValues);
-            double[] xNewValues = new double[]{1, 3, 7, 9};
-            AbstractTabulatedFunction.checkSorted(xNewValues);
         });
+        double[] xNewValues = new double[]{1, 3, 4, 9};
+        AbstractTabulatedFunction.checkSorted(xNewValues);
     }
 
     @Test
