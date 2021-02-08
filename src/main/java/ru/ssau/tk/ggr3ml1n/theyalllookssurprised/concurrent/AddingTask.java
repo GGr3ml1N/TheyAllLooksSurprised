@@ -2,11 +2,11 @@ package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.concurrent;
 
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function.TabulatedFunction;
 
-public class MultiplyingTask implements Runnable {
+public class AddingTask implements Runnable {
 
     private final TabulatedFunction function;
 
-    public MultiplyingTask(TabulatedFunction func) {
+    public AddingTask(TabulatedFunction func) {
         this.function = func;
     }
 
@@ -19,7 +19,7 @@ public class MultiplyingTask implements Runnable {
             synchronized (function) {
                 y = function.getY(i);
                 System.out.printf("%s, i = %d, x = %f, old y = %f \n", Thread.currentThread().getName(), i, x, y);
-                function.setY(i, y * 10);
+                function.setY(i, y + 3);
                 y = function.getY(i);
             }
             System.out.printf("%s, i = %d, x = %f, new y = %f \n", Thread.currentThread().getName(), i, x, y);
