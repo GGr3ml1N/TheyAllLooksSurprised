@@ -1,5 +1,6 @@
 package ru.ssau.tk.ggr3ml1n.theyalllookssurprised.operations;
 
+import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.concurrent.SynchronizedTabulatedFunction;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function.Point;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function.TabulatedFunction;
 import ru.ssau.tk.ggr3ml1n.theyalllookssurprised.function.factory.ArrayTabulatedFunctionFactory;
@@ -41,5 +42,15 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         yValues[length - 1] = yValues[length - 2];
 
         return factory.create(xValues, yValues);
+    }
+
+    public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
+        Object mu = new Object();
+
+        if (function instanceof SynchronizedTabulatedFunction) {
+            return ((SynchronizedTabulatedFunction) function).doSynchronously(this::derive);
+        }
+        SynchronizedTabulatedFunction syncFunc = new SynchronizedTabulatedFunction(function, mu);
+        return syncFunc.doSynchronously(this::derive);
     }
 }
