@@ -12,26 +12,21 @@ import java.util.NoSuchElementException;
 import static org.testng.Assert.*;
 
 public class SynchronizedTabulatedFunctionTest {
+    public static final double DELTA = 0.0001;
     private final double[] xValues = {1.1, 1.2, 1.3, 1.4, 1.5};
     private final double[] yValues = {3.1, 3.2, 3.3, 3.4, 3.5};
     private final Object mutex = new Object();
-    final double delta = 0.0001;
-
     private SynchronizedTabulatedFunction getSynchronizedList() {
         return new SynchronizedTabulatedFunction(new LinkedListTabulatedFunction(xValues, yValues), mutex);
     }
-
     private SynchronizedTabulatedFunction getSynchronizedArray() {
         return new SynchronizedTabulatedFunction(new ArrayTabulatedFunction(xValues, yValues), mutex);
     }
-
-
     @Test
     public void testGetCount() {
         assertEquals(getSynchronizedList().getCount(), 5);
         assertEquals(getSynchronizedArray().getCount(), 5);
     }
-
     @Test
     public void testGetX() {
         assertEquals(getSynchronizedList().getX(0), 1.1);
@@ -44,9 +39,7 @@ public class SynchronizedTabulatedFunctionTest {
         assertEquals(getSynchronizedArray().getX(2), 1.3);
         assertEquals(getSynchronizedArray().getX(3), 1.4);
         assertEquals(getSynchronizedArray().getX(4), 1.5);
-
     }
-
     @Test
     public void testGetY() {
         assertEquals(getSynchronizedList().getY(0), 3.1);
@@ -60,7 +53,6 @@ public class SynchronizedTabulatedFunctionTest {
         assertEquals(getSynchronizedArray().getY(3), 3.4);
         assertEquals(getSynchronizedArray().getY(4), 3.5);
     }
-
     @Test
     public void testSetY() {
         ZeroFunction source = new ZeroFunction();
@@ -72,8 +64,6 @@ public class SynchronizedTabulatedFunctionTest {
         checkFunction.setY(2, 7);
         assertEquals(checkFunction.getY(2), 7);
     }
-
-
     @Test
     public void testIndexOfX() {
         assertEquals(getSynchronizedArray().indexOfX(1.3), 2);
@@ -83,8 +73,6 @@ public class SynchronizedTabulatedFunctionTest {
         assertEquals(getSynchronizedList().indexOfX(1.3), 2);
         assertEquals(getSynchronizedList().indexOfX(1.5), 4);
     }
-
-
     @Test
     public void testIndexOfY() {
         assertEquals(getSynchronizedArray().indexOfY(3.3), 2);
@@ -94,19 +82,16 @@ public class SynchronizedTabulatedFunctionTest {
         assertEquals(getSynchronizedList().indexOfY(3.3), 2);
         assertEquals(getSynchronizedList().indexOfY(3.5), 4);
     }
-
     @Test
     public void testLeftBound() {
         assertEquals(getSynchronizedList().leftBound(), 1.1);
         assertEquals(getSynchronizedArray().leftBound(), 1.1);
     }
-
     @Test
     public void testRightBound() {
         assertEquals(getSynchronizedArray().rightBound(), 1.5);
         assertEquals(getSynchronizedList().rightBound(), 1.5);
     }
-
     @Test
     public void testIteratorWhile() {
         Iterator<Point> it1 = getSynchronizedArray().iterator();
@@ -118,9 +103,7 @@ public class SynchronizedTabulatedFunctionTest {
         }
         assertEquals(getSynchronizedArray().getCount(), i);
         assertThrows(NoSuchElementException.class, it1::next);
-
     }
-
     @Test
     public void testIteratorForEach() {
         int i = 0;
@@ -130,15 +113,20 @@ public class SynchronizedTabulatedFunctionTest {
         }
         assertEquals(getSynchronizedList().getCount(), i);
     }
-
-
     @Test
     public void testApply() {
-        assertEquals(getSynchronizedList().apply(5), 7, delta);
-        assertEquals(getSynchronizedList().apply(7), 9, delta);
-        assertEquals(getSynchronizedList().apply(9), 11, delta);
-        assertEquals(getSynchronizedArray().apply(6), 8, delta);
-        assertEquals(getSynchronizedArray().apply(8), 10, delta);
-        assertEquals(getSynchronizedArray().apply(10), 12, delta);
+        assertEquals(getSynchronizedList().apply(5), 7);
+        assertEquals(getSynchronizedList().apply(7), 9);
+        assertEquals(getSynchronizedList().apply(9), 11);
+        assertEquals(getSynchronizedArray().apply(6), 8);
+        assertEquals(getSynchronizedArray().apply(8), 10);
+        assertEquals(getSynchronizedArray().apply(10), 12);
+    }
+
+    @Test
+    public void testDoSynchronously() {
+        SynchronizedTabulatedFunction synchronizedTabulatedFunction = getSynchronizedList();
+        assertEquals((int) synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::getCount), 5);
+        assertEquals((double) synchronizedTabulatedFunction.doSynchronously(SynchronizedTabulatedFunction::leftBound), 1.1);
     }
 }
