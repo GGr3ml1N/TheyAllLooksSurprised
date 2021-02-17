@@ -115,12 +115,12 @@ public class SynchronizedTabulatedFunctionTest {
     }
     @Test
     public void testApply() {
-        assertEquals(getSynchronizedList().apply(5), 7);
-        assertEquals(getSynchronizedList().apply(7), 9);
-        assertEquals(getSynchronizedList().apply(9), 11);
-        assertEquals(getSynchronizedArray().apply(6), 8);
-        assertEquals(getSynchronizedArray().apply(8), 10);
-        assertEquals(getSynchronizedArray().apply(10), 12);
+        assertEquals(getSynchronizedList().apply(5), 7, DELTA);
+        assertEquals(getSynchronizedList().apply(7), 9,DELTA);
+        assertEquals(getSynchronizedList().apply(9), 11,DELTA);
+        assertEquals(getSynchronizedArray().apply(6), 8,DELTA);
+        assertEquals(getSynchronizedArray().apply(8), 10,DELTA);
+        assertEquals(getSynchronizedArray().apply(10), 12,DELTA);
     }
 
     @Test

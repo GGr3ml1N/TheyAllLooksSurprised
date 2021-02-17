@@ -9,7 +9,6 @@ public class ReadWriteTask implements Runnable {
         this.function = function;
     }
 
-
     @Override
     public void run() {
         double x;
@@ -26,4 +25,3 @@ public class ReadWriteTask implements Runnable {
         }
     }
 }
-
