@@ -50,7 +50,7 @@ public class MathFunctionWindow extends JDialog {
 
     public void fillMap() {
         nameFunctionMap.put("Единичная функция", new UnitFunction());
-        nameFunctionMap.put("Квадратичная функция", new SqrtFunction());
+        nameFunctionMap.put("Извлечение квадратного корня", new SqrtFunction());
         nameFunctionMap.put("Нулевая функция", new ZeroFunction());
         nameFunctionMap.put("Обратный синус", new ReverseSin());
         nameFunctionMap.put("Тождественная функция", new IdentityFunction());

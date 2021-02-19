@@ -31,7 +31,7 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         setTitle("Главное окно");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 2130, 760);
+        setBounds(0, 0, 1200, 760);
         setContentPane(new BgPanel());
         compose();
         this.factory = new ArrayTabulatedFunctionFactory();
@@ -199,7 +199,7 @@ public class MainWindow extends JFrame {
             } catch (IOException e) {
             }
 
-            g.drawImage(im, 465, 30, null);
+            g.drawImage(im, 350, 30, null);
         }
     }
 
