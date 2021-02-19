@@ -54,7 +54,7 @@ public class MathFunctionWindow extends JDialog {
         nameFunctionMap.put("Нулевая функция", new ZeroFunction());
         nameFunctionMap.put("Обратный синус", new ReverseSin());
         nameFunctionMap.put("Тождественная функция", new IdentityFunction());
-        String[] functions = new String[6];
+        String[] functions = new String[5];
         int i = 0;
         for (String string : nameFunctionMap.keySet()) {
             functions[i++] = string;

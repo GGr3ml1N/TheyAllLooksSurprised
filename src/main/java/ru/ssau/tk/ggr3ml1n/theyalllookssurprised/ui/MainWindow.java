@@ -31,7 +31,7 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         setTitle("Главное окно");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(0, 0, 1130, 840);
+        setBounds(0, 0, 2130, 760);
         setContentPane(new BgPanel());
         compose();
         this.factory = new ArrayTabulatedFunctionFactory();
@@ -39,7 +39,7 @@ public class MainWindow extends JFrame {
 
     public static void main(String[] args) {
         MainWindow window = new MainWindow();
-        window.setBackground(new Color(31, 21, 12)); //фон под кнопками
+        window.setBackground(new Color(83,118,7)); //фон под кнопками
         window.setVisible(true);
         window.setResizable(false);
     }
@@ -61,7 +61,7 @@ public class MainWindow extends JFrame {
         JScrollPane pane = new JScrollPane();
         designTable(table, pane);
         JPanel northPanel = new JPanel();
-        northPanel.setBackground(new Color(31, 21, 12));
+        northPanel.setBackground(new Color(83,118,7));
         designButton(inputButtonTable, "Таблица");
         inputButtonTable.addActionListener(event -> {
                     try {
@@ -93,6 +93,7 @@ public class MainWindow extends JFrame {
             }
         });
         northPanel.add(inputButtonMath);
+
         designButton(inputButtonFactory, "Выбрать тип фабрики");
         inputButtonFactory.addActionListener(event -> {
             try {
@@ -156,10 +157,12 @@ public class MainWindow extends JFrame {
             }
         });
         northPanel.add(differential);
+
         add(northPanel, BorderLayout.NORTH);
         add(pane, BorderLayout.SOUTH);
         setLocationByPlatform(true);
     }
+
 
     public void designButton(JButton button, String name) {
         button.setText(name);
@@ -186,15 +189,18 @@ public class MainWindow extends JFrame {
         designedPane.setViewportView(designedTable);
     }
 
+
+    }
     class BgPanel extends JPanel {
         public void paintComponent(Graphics g) {
             Image im = null;
             try {
-                im = ImageIO.read(new File("photo/2.jpg"));
+                im = ImageIO.read(new File("res/12.jpg"));
             } catch (IOException e) {
             }
 
-            g.drawImage(im, 190, -50, null);
+            g.drawImage(im, 465, 30, null);
         }
     }
-}
+
+
