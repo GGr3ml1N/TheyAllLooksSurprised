@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class TabulatedFunctionFileReader {
     public static void main(String[] args) {
-        File file = new File("input/function.txt.rtf");
+        File file = new File("res/input/function.txt.rtf");
         try (BufferedReader inArray = new BufferedReader(new FileReader(file)); BufferedReader inList = new BufferedReader(new FileReader(file))) {
             TabulatedFunction arrayFunction = FunctionsIO.readTabulatedFunction(inArray, new ArrayTabulatedFunctionFactory());
             System.out.println(arrayFunction.toString());

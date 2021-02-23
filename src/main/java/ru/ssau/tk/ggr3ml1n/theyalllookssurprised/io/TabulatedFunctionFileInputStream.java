@@ -9,7 +9,7 @@ import java.io.*;
 
 public class TabulatedFunctionFileInputStream {
     public static void main(String[] args) {
-        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream("input/binary function.bin"))) {
+        try (BufferedInputStream in = new BufferedInputStream(new FileInputStream("res/input/array function.bin"))) {
             ArrayTabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
             TabulatedFunction functionArray = FunctionsIO.readTabulatedFunction(in, factory);
 

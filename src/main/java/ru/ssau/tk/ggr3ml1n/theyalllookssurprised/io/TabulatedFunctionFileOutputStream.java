@@ -11,8 +11,8 @@ import java.io.IOException;
 
 public class TabulatedFunctionFileOutputStream {
     public static void main(String[] args) {
-        File fileArray = new File("output/array function.bin");
-        File fileList = new File("output/linked list function.bin");
+        File fileArray = new File("res/output/array function.bin");
+        File fileList = new File("res/output/linked list function.bin");
 
         double[] xValue = new double[]{1.1, 1.2, 1.3, 1.4, 1.5};
         double[] yValue = new double[]{2.1, 2.2, 2.3, 2.4, 2.5};
